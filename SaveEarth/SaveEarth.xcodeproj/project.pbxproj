@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2CAC03412C2FC12600CC47C6 /* AppLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC03402C2FC12600CC47C6 /* AppLocation.swift */; };
 		A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */; };
 		A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */; };
 		A9067B932C2FA81100D13CA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9067B922C2FA81100D13CA9 /* Assets.xcassets */; };
@@ -17,6 +16,8 @@
 		A9067BAC2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067BAB2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift */; };
 		DA5A5EDD2C2FBB4D00955A9A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDC2C2FBB4D00955A9A /* MapView.swift */; };
 		DA5A5EDF2C2FBC2500955A9A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */; };
+		DA5A8DE72C2FCCCD00019D61 /* PolarMapProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A8DE62C2FCCCD00019D61 /* PolarMapProjection.swift */; };
+		DA5A8DE92C2FCD1300019D61 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A8DE82C2FCD1300019D61 /* DataPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		A9067BAB2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DA5A5EDC2C2FBB4D00955A9A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		DA5A8DE62C2FCCCD00019D61 /* PolarMapProjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarMapProjection.swift; sourceTree = "<group>"; };
+		DA5A8DE82C2FCD1300019D61 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,7 @@
 		DA5A5EC92C2FB8C800955A9A /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				DA5A8DE42C2FCCB000019D61 /* Model */,
 				DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */,
 			);
 			path = Chart;
@@ -160,19 +164,21 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		DA5A5ED72C2FB97E00955A9A /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		DA5A5EDB2C2FBB4300955A9A /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				DA5A5EDC2C2FBB4D00955A9A /* MapView.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		DA5A8DE42C2FCCB000019D61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DA5A8DE62C2FCCCD00019D61 /* PolarMapProjection.swift */,
+				DA5A8DE82C2FCD1300019D61 /* DataPoint.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,8 +311,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA5A8DE92C2FCD1300019D61 /* DataPoint.swift in Sources */,
 				A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */,
 				A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */,
+				DA5A8DE72C2FCCCD00019D61 /* PolarMapProjection.swift in Sources */,
 				DA5A5EDD2C2FBB4D00955A9A /* MapView.swift in Sources */,
 				DA5A5EDF2C2FBC2500955A9A /* ChartView.swift in Sources */,
 			);

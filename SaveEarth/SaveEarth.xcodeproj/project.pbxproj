@@ -10,13 +10,12 @@
 		2CAC03412C2FC12600CC47C6 /* AppLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC03402C2FC12600CC47C6 /* AppLocation.swift */; };
 		A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */; };
 		A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */; };
-		A9067B912C2FA80F00D13CA9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B902C2FA80F00D13CA9 /* Item.swift */; };
 		A9067B932C2FA81100D13CA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9067B922C2FA81100D13CA9 /* Assets.xcassets */; };
 		A9067B962C2FA81100D13CA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9067B952C2FA81100D13CA9 /* Preview Assets.xcassets */; };
 		A9067BA02C2FA81100D13CA9 /* SaveEarthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B9F2C2FA81100D13CA9 /* SaveEarthTests.swift */; };
 		A9067BAA2C2FA81100D13CA9 /* SaveEarthUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067BA92C2FA81100D13CA9 /* SaveEarthUITests.swift */; };
 		A9067BAC2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067BAB2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift */; };
-		DA5A5EDD2C2FBB4D00955A9A /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDC2C2FBB4D00955A9A /* SwiftUIView.swift */; };
+		DA5A5EDD2C2FBB4D00955A9A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDC2C2FBB4D00955A9A /* MapView.swift */; };
 		DA5A5EDF2C2FBC2500955A9A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +41,6 @@
 		A9067B892C2FA80F00D13CA9 /* SaveEarth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveEarth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthApp.swift; sourceTree = "<group>"; };
 		A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A9067B902C2FA80F00D13CA9 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		A9067B922C2FA81100D13CA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9067B952C2FA81100D13CA9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A9067B9B2C2FA81100D13CA9 /* SaveEarthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaveEarthTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,7 +48,7 @@
 		A9067BA52C2FA81100D13CA9 /* SaveEarthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaveEarthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9067BA92C2FA81100D13CA9 /* SaveEarthUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthUITests.swift; sourceTree = "<group>"; };
 		A9067BAB2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		DA5A5EDC2C2FBB4D00955A9A /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		DA5A5EDC2C2FBB4D00955A9A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +106,6 @@
 				DA5A5EC92C2FB8C800955A9A /* Chart */,
 				A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */,
 				A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */,
-				A9067B902C2FA80F00D13CA9 /* Item.swift */,
 				A9067B922C2FA81100D13CA9 /* Assets.xcassets */,
 				A9067B942C2FA81100D13CA9 /* Preview Content */,
 			);
@@ -173,7 +170,7 @@
 		DA5A5EDB2C2FBB4300955A9A /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				DA5A5EDC2C2FBB4D00955A9A /* SwiftUIView.swift */,
+				DA5A5EDC2C2FBB4D00955A9A /* MapView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -309,9 +306,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */,
-				A9067B912C2FA80F00D13CA9 /* Item.swift in Sources */,
 				A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */,
-				DA5A5EDD2C2FBB4D00955A9A /* SwiftUIView.swift in Sources */,
+				DA5A5EDD2C2FBB4D00955A9A /* MapView.swift in Sources */,
 				DA5A5EDF2C2FBC2500955A9A /* ChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

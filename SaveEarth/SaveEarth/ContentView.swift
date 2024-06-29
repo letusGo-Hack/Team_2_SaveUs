@@ -107,16 +107,24 @@ struct ContentView: View {
                             longitude: desiredLongitude
                         )
                     )
-
-                )
-                
-                // TODO: SwiftData 개체 생성
-                
-                Task { @MainActor in
-                    current = fetchedData?.currentTemperature ?? 0.0
-                    average = fetchedData?.historicTemperature ?? 0.0
                     
-                    isSetup.toggle()
+                    print(fetchedData)
+                    print("현재 \(fetchedData?.currentTemperature)")
+                    print("평균 \(fetchedData?.historicTemperature)")
+                    print("차이 \(fetchedData?.temperatureDeviation())")
+                    
+            
+                    Task { @MainActor in
+                        current = fetchedData?.currentTemperature ?? 0.0
+                        average = fetchedData?.historicTemperature ?? 0.0
+                        
+                        
+                        isSetup.toggle()
+                    }
+                    
+                    
+                } catch {
+                    print("날씨정보 불러오기 실패\(error)")
                 }
             }
         }

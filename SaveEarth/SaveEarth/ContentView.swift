@@ -15,17 +15,7 @@ struct ContentView: View {
     @State var desiredLongitude: CGFloat = -41.666646
     
     @State private var showModal: Bool = false
-//    @State private var quests: [Quest] = [
-//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 1"),
-//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 2"),
-//        Quest(id: UUID(), isChecked: true, questTitle: "Quest 3"),
-//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 1"),
-//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 2"),
-//        Quest(id: UUID(), isChecked: true, questTitle: "Quest 3"),
-//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 1"),
-//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 2"),
-//        Quest(id: UUID(), isChecked: true, questTitle: "Quest 3")
-//    ]
+    @State private var quests: [Quest] = []
     
     @State var isSetup: Bool = false
     @State var completion: Float = 0.0
@@ -49,6 +39,7 @@ struct ContentView: View {
                     .transition(.move(edge: .bottom))
                     .animation(.default, value: showModal)
                     .ignoresSafeArea(edges: .bottom)
+                }
             } else {
                 ProgressView()
             }

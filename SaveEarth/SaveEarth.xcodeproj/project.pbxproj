@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CAC03412C2FC12600CC47C6 /* AppLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC03402C2FC12600CC47C6 /* AppLocation.swift */; };
 		A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */; };
 		A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */; };
 		A9067B912C2FA80F00D13CA9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B902C2FA80F00D13CA9 /* Item.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2CAC03402C2FC12600CC47C6 /* AppLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocation.swift; sourceTree = "<group>"; };
 		A9067B892C2FA80F00D13CA9 /* SaveEarth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveEarth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthApp.swift; sourceTree = "<group>"; };
 		A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				DA5A5EDB2C2FBB4300955A9A /* Map */,
-				DA5A5ED72C2FB97E00955A9A /* Protocols */,
 				DA5A5ECB2C2FB8D800955A9A /* Util */,
 				DA5A5ECA2C2FB8CF00955A9A /* Weather */,
 				DA5A5EC92C2FB8C800955A9A /* Chart */,
@@ -150,6 +151,7 @@
 		DA5A5ECA2C2FB8CF00955A9A /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				2CAC03402C2FC12600CC47C6 /* AppLocation.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";

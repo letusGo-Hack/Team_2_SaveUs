@@ -14,17 +14,13 @@ struct ChartView: View {
     @Binding var lon: CGFloat
     
     var body: some View {
-        MapView(lat: $lat, lon: $lon)
-            .overlay {
-                Chart {
-                    PointPlot(
-                        DataPoint.mockData,
-                        x: .value("Longitude", \.mapProjection.x),
-                        y: .value("Latitude", \.mapProjection.y)
-                    )
-                }
-            }
-        
+        Chart {
+            PointPlot(
+                DataPoint.mockData,
+                x: .value("Longitude", \.mapProjection.x),
+                y: .value("Latitude", \.mapProjection.y)
+            )
+        }
     }
 }
 

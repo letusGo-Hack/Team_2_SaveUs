@@ -10,6 +10,7 @@ import Charts
 import MapKit
 
 struct MapView: View {
+    
     @Binding var lat: CGFloat
     @Binding var lon: CGFloat
     
@@ -19,9 +20,9 @@ struct MapView: View {
         return .init(latitude: lat, longitude: lon)
     }
     
+    @State var isTapped: Bool = false
     private let distanceInMeters: CLLocationDistance = 15_000_000
-    
-    // 대략적인 미터를 도로 변환
+
     private var region: MKCoordinateRegion {
         return MKCoordinateRegion(
             center: self.desiredCoordinate,
@@ -35,15 +36,23 @@ struct MapView: View {
     // MARK: - views
     
     var body: some View {
-        Map(initialPosition: .region(region), bounds: .init(centerCoordinateBounds: region, minimumDistance: distanceInMeters, maximumDistance: distanceInMeters)) {
+        Map(
+            initialPosition: .region(region),
+            bounds: .init(
+                centerCoordinateBounds: region,
+                minimumDistance: distanceInMeters,
+                maximumDistance: distanceInMeters
+            )
+        ) {
             Annotation("", coordinate: desiredCoordinate) {
                 VStack {
-                    Image(systemName: "pin.circle.fill")
+                    Image(systemName: "play.fill")
                         .foregroundColor(.red)
-                        .font(.title)
+                        .font(.largeTitle)
+                        .symbolEffect(.scale.up, isActive: isTapped)
                 }
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

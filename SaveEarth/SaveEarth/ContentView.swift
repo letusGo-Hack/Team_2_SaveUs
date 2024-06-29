@@ -9,14 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     
-    
-    @State var desiredLatitude: CGFloat = 72.5801141
-    @State var desiredLongitude: CGFloat = -38.4688798
+    @State var desiredLatitude: CGFloat = 76.571640
+    @State var desiredLongitude: CGFloat = -41.666646
     
     var body: some View {
-        VStack {
-            MapView(lat: $desiredLatitude, lon: $desiredLongitude)
-        }
+        MapView(lat: $desiredLatitude, lon: $desiredLongitude)            
     }
 }
 

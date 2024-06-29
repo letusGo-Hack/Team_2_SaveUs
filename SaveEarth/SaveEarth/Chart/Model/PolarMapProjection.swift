@@ -20,14 +20,9 @@ struct PolarProjection: Sendable {
     var x, y: Double
     
     init(xLongitude: Angle, yLatitude: Angle) {
-        // North Pole (90 degrees latitude)
         let centralLatitude = Angle(degrees: 90.0).radians
-        
-        // Convert angles to radians
         let lambda = xLongitude.radians
         let phi = yLatitude.radians
-        
-        // Calculate x and y using the azimuthal equidistant projection formula
         let rho = centralLatitude - phi
         let theta = lambda
         

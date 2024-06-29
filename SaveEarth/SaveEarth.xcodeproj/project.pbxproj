@@ -12,6 +12,7 @@
 		A59CE1392C2FFD6B00038D84 /* DayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE1382C2FFD6B00038D84 /* DayInfo.swift */; };
 		A59CE13C2C30081500038D84 /* AppLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC03402C2FC12600CC47C6 /* AppLocation.swift */; };
 		A59CE13D2C30083300038D84 /* CompleteQuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0732C2FFB2C0022466D /* CompleteQuestView.swift */; };
+		A59CE13F2C300B6300038D84 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A59CE13E2C300B6300038D84 /* Launch Screen.storyboard */; };
 		A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */; };
 		A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */; };
 		A9067B932C2FA81100D13CA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9067B922C2FA81100D13CA9 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		2CAC03422C2FE59A00CC47C6 /* TemperatureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureData.swift; sourceTree = "<group>"; };
 		2CAC03462C2FE7FA00CC47C6 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		A59CE1382C2FFD6B00038D84 /* DayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfo.swift; sourceTree = "<group>"; };
+		A59CE13E2C300B6300038D84 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A9067B892C2FA80F00D13CA9 /* SaveEarth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveEarth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthApp.swift; sourceTree = "<group>"; };
 		A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				A9067BC92C2FEA8700D13CA9 /* TemperatureGradient.swift */,
 				A9067B922C2FA81100D13CA9 /* Assets.xcassets */,
 				A9067B942C2FA81100D13CA9 /* Preview Content */,
+				A59CE13E2C300B6300038D84 /* Launch Screen.storyboard */,
 			);
 			path = SaveEarth;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A59CE13F2C300B6300038D84 /* Launch Screen.storyboard in Resources */,
 				A9067B962C2FA81100D13CA9 /* Preview Assets.xcassets in Resources */,
 				A9067B932C2FA81100D13CA9 /* Assets.xcassets in Resources */,
 			);

@@ -104,6 +104,7 @@ struct ContentView: View {
                     )
                     
                     context.insert(dayInfo)
+                    try context.save()
                     
                     
                     Task { @MainActor in
@@ -122,7 +123,7 @@ struct ContentView: View {
     func makeMissionList(
         count: Int
     ) -> [Mission] {
-        var mutableArray: [Quest] = [
+        var questList: [Quest] = [
             .init(questTitle: "페트병 분리수거 하기"),
             .init(questTitle: "에어컨 1도 낮추기"),
             .init(questTitle: "오늘 하루 텀블러 사용하기"),
@@ -131,13 +132,22 @@ struct ContentView: View {
             .init(questTitle: "낮에는 전등 끄기"),
             .init(questTitle: "사용하지 않는 콘센트 선 뽑아 놓기")
         ]
-        let missionList = [Mission]()
+        var missionList = [Mission]()
         
         while missionList.count == count {
             
             // 배열에서 랜덤 인덱스 선택
-            let randomIndex = Int.random(in: 0..<mutableArray.count)
-            
+            let randomIndex = Int.random(in: 0..<questList.count)
+            let randomItem = questList[randomIndex]
+            if missionList.contains(where: { $0.title == randomItem.questTitle }) {
+                continue
+            }
+            missionList.append(
+                .init(
+                    title: randomItem.questTitle,
+                    isClear: randomItem.isChecked
+                )
+            )
         }
         
         return missionList

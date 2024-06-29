@@ -13,27 +13,29 @@ struct MapView: View {
     @Binding var lat: CGFloat
     @Binding var lon: CGFloat
     
-    var desiredCoordinate: CLLocationCoordinate2D {
+    // MARK: - private properties
+    
+    private var desiredCoordinate: CLLocationCoordinate2D {
         return .init(latitude: lat, longitude: lon)
     }
     
-    private let latMeters: CLLocationDistance = 1_000
-    private let lonMeters: CLLocationDistance = 1_000
+    private let distanceInMeters: CLLocationDistance = 15_000_000
     
+    // 대략적인 미터를 도로 변환
     private var region: MKCoordinateRegion {
-        return .init(
+        return MKCoordinateRegion(
             center: self.desiredCoordinate,
-            latitudinalMeters: latMeters,
-            longitudinalMeters: lonMeters
+            span: MKCoordinateSpan(
+                latitudeDelta: distanceInMeters,
+                longitudeDelta: distanceInMeters
+            )
         )
     }
     
     // MARK: - views
     
     var body: some View {
-        Map(
-            initialPosition: .region(region)
-        ) {
+        Map(initialPosition: .region(region), bounds: .init(centerCoordinateBounds: region, minimumDistance: distanceInMeters, maximumDistance: distanceInMeters)) {
             Annotation("", coordinate: desiredCoordinate) {
                 VStack {
                     Image(systemName: "pin.circle.fill")
@@ -43,7 +45,5 @@ struct MapView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-
     }
-    
 }

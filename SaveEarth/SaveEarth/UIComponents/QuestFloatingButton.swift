@@ -27,7 +27,7 @@ struct QuestFloatingButton: View {
 }
 
 #Preview {
-    QuestFloatingButton(numberOfQuests: .constant(3)) {
+    QuestFloatingButton(numberOfQuests: UInt(3)) {
         print("button tap!")
     }
 }

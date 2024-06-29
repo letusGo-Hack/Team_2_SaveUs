@@ -14,8 +14,13 @@ struct ContentView: View {
     @State var desiredLatitude: CGFloat = 76.571640
     @State var desiredLongitude: CGFloat = -41.666646
     
-    @State private var showModal: Bool = false
-    @State private var quests: [Quest] = []
+    @State private var showQuestModal: Bool = false
+    @State private var quests: [Quest] = [
+        .init(id: UUID(), isChecked: true, questTitle: "11"),
+        .init(id: UUID(), isChecked: true, questTitle: "22"),
+        .init(id: UUID(), isChecked: true, questTitle: "33"),
+        .init(id: UUID(), isChecked: true, questTitle: "44")
+    ]
     
     @State var isSetup: Bool = false
     @State var completion: Float = 0.0
@@ -26,24 +31,28 @@ struct ContentView: View {
                 lat: $desiredLatitude,
                 lon: $desiredLongitude
             )
+            
             TemperatureGradient(complete: $completion)
                 .ignoresSafeArea()
             
             if isSetup {
-                Text("미션") // TODO: 미션 관련 뷰
-                
-                if showModal {
-                    QuestModalView(isPresented: $showModal) {
+                if showQuestModal {
+                    QuestModalView(isPresented: $showQuestModal) {
                         QuestView(quests: $quests)
                     }
                     .transition(.move(edge: .bottom))
-                    .animation(.default, value: showModal)
+                    .animation(.default, value: showQuestModal)
                     .ignoresSafeArea(edges: .bottom)
                 }
             } else {
                 ProgressView()
             }
         }
+        .overlay(alignment: .top, content: {
+            QuestFloatingButton(numberOfQuests: UInt(self.quests.count)) {
+                self.showQuestModal = true
+            }
+        })
         .task {
             // TODO: SwiftData 체크
             guard true else { return }

@@ -46,7 +46,7 @@ struct MapView: View {
         ) {
             Annotation("", coordinate: desiredCoordinate) {
                 VStack {
-                    Image(systemName: "play.fill")
+                    Image(systemName: "flame.fill")
                         .foregroundColor(.red)
                         .font(.largeTitle)
                         .symbolEffect(.scale.up, isActive: isTapped)

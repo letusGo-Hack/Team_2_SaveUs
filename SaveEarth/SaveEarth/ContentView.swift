@@ -14,6 +14,19 @@ struct ContentView: View {
     @State var desiredLatitude: CGFloat = 76.571640
     @State var desiredLongitude: CGFloat = -41.666646
     
+    @State private var showModal: Bool = false
+//    @State private var quests: [Quest] = [
+//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 1"),
+//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 2"),
+//        Quest(id: UUID(), isChecked: true, questTitle: "Quest 3"),
+//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 1"),
+//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 2"),
+//        Quest(id: UUID(), isChecked: true, questTitle: "Quest 3"),
+//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 1"),
+//        Quest(id: UUID(), isChecked: false, questTitle: "Quest 2"),
+//        Quest(id: UUID(), isChecked: true, questTitle: "Quest 3")
+//    ]
+    
     @State var isSetup: Bool = false
     @State var completion: Float = 0.0
     
@@ -28,6 +41,14 @@ struct ContentView: View {
             
             if isSetup {
                 Text("미션") // TODO: 미션 관련 뷰
+                
+                if showModal {
+                    QuestModalView(isPresented: $showModal) {
+                        QuestView(quests: $quests)
+                    }
+                    .transition(.move(edge: .bottom))
+                    .animation(.default, value: showModal)
+                    .ignoresSafeArea(edges: .bottom)
             } else {
                 ProgressView()
             }
@@ -57,6 +78,7 @@ struct ContentView: View {
                 }
             } catch {
                 print("날씨정보 불러오기 실패\(error)")
+
             }
         }
     }

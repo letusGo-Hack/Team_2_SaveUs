@@ -1,5 +1,5 @@
 //
-//  ButtonAppearingTransition.swift
+//  AppearingTransition.swift
 //  SaveEarth
 //
 //  Created by 송하민 on 6/29/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ButtonAppearingTransition: Transition {
+struct AppearingTransition: Transition {
     func body(content: Content, phase: TransitionPhase) -> some View {
         content
             .scaleEffect(phase.isIdentity ? 1 : 0.5)

@@ -15,10 +15,12 @@ struct ContentView: View {
     @State var desiredLongitude: CGFloat = -41.666646
     
     @State private var showQuestModal: Bool = false
+    @State private var allQuestCheck: Bool = false
+    
     @State private var quests: [Quest] = [
         .init(id: UUID(), isChecked: true, questTitle: "11"),
         .init(id: UUID(), isChecked: true, questTitle: "22"),
-        .init(id: UUID(), isChecked: true, questTitle: "33"),
+        .init(id: UUID(), isChecked: false, questTitle: "33"),
         .init(id: UUID(), isChecked: true, questTitle: "44")
     ]
     
@@ -38,11 +40,16 @@ struct ContentView: View {
             if isSetup {
                 if showQuestModal {
                     QuestModalView(isPresented: $showQuestModal) {
-                        QuestView(quests: $quests)
+                        QuestView(quests: $quests, isPresented: $showQuestModal)
                     }
                     .transition(.move(edge: .bottom))
                     .animation(.default, value: showQuestModal)
                     .ignoresSafeArea(edges: .bottom)
+                } else {
+                    if self.quests.map({ $0.isChecked }).allSatisfy({ $0 == true }) {
+                        CompleteQuestView()
+                            .transition(CompleteRotatingTransition())
+                    }
                 }
             } else {
                 ProgressView()
@@ -50,11 +57,12 @@ struct ContentView: View {
         }
         .animation(.spring(), value: showQuestModal)
         .overlay(alignment: .top, content: {
-            if !self.showQuestModal {
+            if !self.showQuestModal &&
+                !self.quests.map({ $0.isChecked }).allSatisfy({ $0 == true }) {
                 QuestFloatingButton(numberOfQuests: UInt(self.quests.count)) {
                     self.showQuestModal = true
                 }
-                .transition(ButtonAppearingTransition())
+                .transition(AppearingTransition())
             }
         })
         .animation(.default, value: !showQuestModal)

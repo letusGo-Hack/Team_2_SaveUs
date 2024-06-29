@@ -25,6 +25,8 @@
 		DAD0E06C2C2FF3AC0022466D /* QuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0692C2FF3AC0022466D /* QuestView.swift */; };
 		DAD0E06F2C2FF4340022466D /* QuestFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E06D2C2FF4340022466D /* QuestFloatingButton.swift */; };
 		DAD0E0722C2FF8C90022466D /* ButtonAppearingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0712C2FF8C90022466D /* ButtonAppearingTransition.swift */; };
+		DAD0E0742C2FFB2C0022466D /* CompleteQuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0732C2FFB2C0022466D /* CompleteQuestView.swift */; };
+		DAD0E0762C2FFB6A0022466D /* CompleteRotatingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0752C2FFB6A0022466D /* CompleteRotatingTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		DAD0E0692C2FF3AC0022466D /* QuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestView.swift; sourceTree = "<group>"; };
 		DAD0E06D2C2FF4340022466D /* QuestFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestFloatingButton.swift; sourceTree = "<group>"; };
 		DAD0E0712C2FF8C90022466D /* ButtonAppearingTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAppearingTransition.swift; sourceTree = "<group>"; };
+		DAD0E0732C2FFB2C0022466D /* CompleteQuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteQuestView.swift; sourceTree = "<group>"; };
+		DAD0E0752C2FFB6A0022466D /* CompleteRotatingTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRotatingTransition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				A9067BCB2C2FF1D100D13CA9 /* SaveEarth.entitlements */,
-				DAD0E06E2C2FF4340022466D /* UIComponents */,
 				DAD0E06A2C2FF3AC0022466D /* Quests */,
 				DA5A5EDB2C2FBB4300955A9A /* Map */,
 				DA5A5ECB2C2FB8D800955A9A /* Util */,
@@ -224,6 +227,7 @@
 			children = (
 				DAD0E0682C2FF3AC0022466D /* QuestModalView.swift */,
 				DAD0E0692C2FF3AC0022466D /* QuestView.swift */,
+				DAD0E06E2C2FF4340022466D /* UIComponents */,
 			);
 			path = Quests;
 			sourceTree = "<group>";
@@ -232,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				DAD0E06D2C2FF4340022466D /* QuestFloatingButton.swift */,
+				DAD0E0732C2FFB2C0022466D /* CompleteQuestView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				DAD0E0712C2FF8C90022466D /* ButtonAppearingTransition.swift */,
+				DAD0E0752C2FFB6A0022466D /* CompleteRotatingTransition.swift */,
 			);
 			path = Transition;
 			sourceTree = "<group>";
@@ -374,12 +380,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD0E0762C2FFB6A0022466D /* CompleteRotatingTransition.swift in Sources */,
 				DA5A8DE92C2FCD1300019D61 /* DataPoint.swift in Sources */,
 				A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */,
 				A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */,
 				DA5A8DE72C2FCCCD00019D61 /* PolarMapProjection.swift in Sources */,
 				DAD0E06B2C2FF3AC0022466D /* QuestModalView.swift in Sources */,
 				DAD0E06C2C2FF3AC0022466D /* QuestView.swift in Sources */,
+				DAD0E0742C2FFB2C0022466D /* CompleteQuestView.swift in Sources */,
 				DAD0E06F2C2FF4340022466D /* QuestFloatingButton.swift in Sources */,
 				A9067BCA2C2FEA8700D13CA9 /* TemperatureGradient.swift in Sources */,
 				DAD0E0722C2FF8C90022466D /* ButtonAppearingTransition.swift in Sources */,

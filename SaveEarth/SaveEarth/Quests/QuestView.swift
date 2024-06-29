@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Quest: Identifiable {
+struct Quest: Identifiable, Equatable {
     var id: UUID
     var isChecked: Bool
     let questTitle: String
@@ -15,6 +15,7 @@ struct Quest: Identifiable {
 
 struct QuestView: View {
     @Binding var quests: [Quest]
+    @Binding var isPresented: Bool
     
     var body: some View {
         VStack {
@@ -27,6 +28,13 @@ struct QuestView: View {
                         .toggleStyle(CheckboxToggleStyle())
                     }
                 }
+            }
+        }
+        .onChange(of: quests) { oldQuests, newQuests in
+            if newQuests.map({ $0.isChecked }).allSatisfy({ $0 == true }) {
+                self.isPresented = false
+            } else {
+                self.isPresented = true
             }
         }
     }
@@ -47,10 +55,10 @@ struct CheckboxToggleStyle: ToggleStyle {
     }
 }
 
-#Preview {
-    QuestView(quests: .constant([
-        .init(id: UUID(), isChecked: false, questTitle: "1111111"),
-        .init(id: UUID(), isChecked: false, questTitle: "2222222"),
-        .init(id: UUID(), isChecked: false, questTitle: "3333333")
-    ]))
-}
+//#Preview {
+//    QuestView(quests: .constant([
+//        .init(id: UUID(), isChecked: false, questTitle: "1111111"),
+//        .init(id: UUID(), isChecked: false, questTitle: "2222222"),
+//        .init(id: UUID(), isChecked: false, questTitle: "3333333")
+//    ]))
+//}

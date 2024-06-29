@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuestModalView<Content: View>: View {
     @Binding var isPresented: Bool
+    
     let content: Content
     private var safeBottomHeight: CGFloat = 20
     

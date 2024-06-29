@@ -10,6 +10,7 @@
 		2CAC03432C2FE59A00CC47C6 /* TemperatureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC03422C2FE59A00CC47C6 /* TemperatureData.swift */; };
 		2CAC03472C2FE7FA00CC47C6 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC03462C2FE7FA00CC47C6 /* WeatherManager.swift */; };
 		A59CE1392C2FFD6B00038D84 /* DayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE1382C2FFD6B00038D84 /* DayInfo.swift */; };
+		A59CE1412C300FA000038D84 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A59CE1402C300FA000038D84 /* Launch Screen.storyboard */; };
 		A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */; };
 		A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */; };
 		A9067B932C2FA81100D13CA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9067B922C2FA81100D13CA9 /* Assets.xcassets */; };
@@ -52,6 +53,8 @@
 		2CAC03422C2FE59A00CC47C6 /* TemperatureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureData.swift; sourceTree = "<group>"; };
 		2CAC03462C2FE7FA00CC47C6 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		A59CE1382C2FFD6B00038D84 /* DayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfo.swift; sourceTree = "<group>"; };
+		A59CE1402C300FA000038D84 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A59CE1422C30104F00038D84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A9067B892C2FA80F00D13CA9 /* SaveEarth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveEarth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthApp.swift; sourceTree = "<group>"; };
 		A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -158,6 +161,7 @@
 				A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */,
 				A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */,
 				A9067BC92C2FEA8700D13CA9 /* TemperatureGradient.swift */,
+				A59CE1402C300FA000038D84 /* Launch Screen.storyboard */,
 				A9067B922C2FA81100D13CA9 /* Assets.xcassets */,
 				A9067B942C2FA81100D13CA9 /* Preview Content */,
 			);
@@ -365,6 +369,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A59CE1412C300FA000038D84 /* Launch Screen.storyboard in Resources */,
 				A9067B962C2FA81100D13CA9 /* Preview Assets.xcassets in Resources */,
 				A9067B932C2FA81100D13CA9 /* Assets.xcassets in Resources */,
 			);
@@ -575,7 +580,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -602,9 +607,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SaveEarth/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SaveEarth/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

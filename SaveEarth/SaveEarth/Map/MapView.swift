@@ -20,6 +20,7 @@ struct MapView: View {
         return .init(latitude: lat, longitude: lon)
     }
     
+    let isFire: Bool
     @State var isTapped: Bool = false
     private let distanceInMeters: CLLocationDistance = 15_000_000
 
@@ -44,12 +45,14 @@ struct MapView: View {
                 maximumDistance: distanceInMeters
             )
         ) {
-            Annotation("", coordinate: desiredCoordinate) {
-                VStack {
-                    Image(systemName: "flame.fill")
-                        .foregroundColor(.red)
-                        .font(.largeTitle)
-                        .symbolEffect(.scale.up, isActive: isTapped)
+            if isFire {
+                Annotation("", coordinate: desiredCoordinate) {
+                    VStack {
+                        Image(systemName: "flame.fill")
+                            .foregroundColor(.red)
+                            .font(.largeTitle)
+                            .symbolEffect(.scale.up, isActive: isTapped)
+                    }
                 }
             }
         }

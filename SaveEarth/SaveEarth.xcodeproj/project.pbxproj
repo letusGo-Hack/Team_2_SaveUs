@@ -19,6 +19,7 @@
 		A9067BAA2C2FA81100D13CA9 /* SaveEarthUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067BA92C2FA81100D13CA9 /* SaveEarthUITests.swift */; };
 		A9067BAC2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067BAB2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift */; };
 		A9067BCA2C2FEA8700D13CA9 /* TemperatureGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067BC92C2FEA8700D13CA9 /* TemperatureGradient.swift */; };
+		A985C1412C3003B100AA3A6D /* CompleteQuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0732C2FFB2C0022466D /* CompleteQuestView.swift */; };
 		DA5A5EDD2C2FBB4D00955A9A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDC2C2FBB4D00955A9A /* MapView.swift */; };
 		DA5A5EDF2C2FBC2500955A9A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */; };
 		DA5A8DE72C2FCCCD00019D61 /* PolarMapProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A8DE62C2FCCCD00019D61 /* PolarMapProjection.swift */; };
@@ -28,7 +29,6 @@
 		DAD0E06F2C2FF4340022466D /* QuestFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E06D2C2FF4340022466D /* QuestFloatingButton.swift */; };
 		DAD0E0722C2FF8C90022466D /* ButtonAppearingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0712C2FF8C90022466D /* ButtonAppearingTransition.swift */; };
 		DAD0E0762C2FFB6A0022466D /* CompleteRotatingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0752C2FFB6A0022466D /* CompleteRotatingTransition.swift */; };
-		DAD0E0772C3007710022466D /* CompleteQuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0732C2FFB2C0022466D /* CompleteQuestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -395,7 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAD0E0762C2FFB6A0022466D /* CompleteRotatingTransition.swift in Sources */,
-				DAD0E0772C3007710022466D /* CompleteQuestView.swift in Sources */,
+				A985C1412C3003B100AA3A6D /* CompleteQuestView.swift in Sources */,
 				DA5A8DE92C2FCD1300019D61 /* DataPoint.swift in Sources */,
 				A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */,
 				A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */,

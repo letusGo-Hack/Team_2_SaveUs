@@ -27,8 +27,8 @@
 		DAD0E06C2C2FF3AC0022466D /* QuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0692C2FF3AC0022466D /* QuestView.swift */; };
 		DAD0E06F2C2FF4340022466D /* QuestFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E06D2C2FF4340022466D /* QuestFloatingButton.swift */; };
 		DAD0E0722C2FF8C90022466D /* ButtonAppearingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0712C2FF8C90022466D /* ButtonAppearingTransition.swift */; };
-		DAD0E0742C2FFB2C0022466D /* CompleteQuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0732C2FFB2C0022466D /* CompleteQuestView.swift */; };
 		DAD0E0762C2FFB6A0022466D /* CompleteRotatingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0752C2FFB6A0022466D /* CompleteRotatingTransition.swift */; };
+		DAD0E0772C3007710022466D /* CompleteQuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0732C2FFB2C0022466D /* CompleteQuestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -395,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAD0E0762C2FFB6A0022466D /* CompleteRotatingTransition.swift in Sources */,
+				DAD0E0772C3007710022466D /* CompleteQuestView.swift in Sources */,
 				DA5A8DE92C2FCD1300019D61 /* DataPoint.swift in Sources */,
 				A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */,
 				A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */,

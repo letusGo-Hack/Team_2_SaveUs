@@ -34,6 +34,11 @@ struct ContentView: View {
                     }
                 }
             }
+            
+            MapView(
+                centerLatitude: 72.5801141,
+                centerLongitude: -38.4688798
+            )
         } detail: {
             Text("Select an item")
         }

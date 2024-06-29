@@ -15,6 +15,8 @@
 		A9067BA02C2FA81100D13CA9 /* SaveEarthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B9F2C2FA81100D13CA9 /* SaveEarthTests.swift */; };
 		A9067BAA2C2FA81100D13CA9 /* SaveEarthUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067BA92C2FA81100D13CA9 /* SaveEarthUITests.swift */; };
 		A9067BAC2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067BAB2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift */; };
+		DA5A5EDD2C2FBB4D00955A9A /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDC2C2FBB4D00955A9A /* SwiftUIView.swift */; };
+		DA5A5EDF2C2FBC2500955A9A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		A9067BA52C2FA81100D13CA9 /* SaveEarthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaveEarthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9067BA92C2FA81100D13CA9 /* SaveEarthUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthUITests.swift; sourceTree = "<group>"; };
 		A9067BAB2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DA5A5EDC2C2FBB4D00955A9A /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,11 @@
 		A9067B8B2C2FA80F00D13CA9 /* SaveEarth */ = {
 			isa = PBXGroup;
 			children = (
+				DA5A5EDB2C2FBB4300955A9A /* Map */,
+				DA5A5ED72C2FB97E00955A9A /* Protocols */,
+				DA5A5ECB2C2FB8D800955A9A /* Util */,
+				DA5A5ECA2C2FB8CF00955A9A /* Weather */,
+				DA5A5EC92C2FB8C800955A9A /* Chart */,
 				A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */,
 				A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */,
 				A9067B902C2FA80F00D13CA9 /* Item.swift */,
@@ -128,6 +137,43 @@
 				A9067BAB2C2FA81100D13CA9 /* SaveEarthUITestsLaunchTests.swift */,
 			);
 			path = SaveEarthUITests;
+			sourceTree = "<group>";
+		};
+		DA5A5EC92C2FB8C800955A9A /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				DA5A5EDE2C2FBC2500955A9A /* ChartView.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		DA5A5ECA2C2FB8CF00955A9A /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		DA5A5ECB2C2FB8D800955A9A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		DA5A5ED72C2FB97E00955A9A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		DA5A5EDB2C2FBB4300955A9A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				DA5A5EDC2C2FBB4D00955A9A /* SwiftUIView.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +309,8 @@
 				A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */,
 				A9067B912C2FA80F00D13CA9 /* Item.swift in Sources */,
 				A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */,
+				DA5A5EDD2C2FBB4D00955A9A /* SwiftUIView.swift in Sources */,
+				DA5A5EDF2C2FBC2500955A9A /* ChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

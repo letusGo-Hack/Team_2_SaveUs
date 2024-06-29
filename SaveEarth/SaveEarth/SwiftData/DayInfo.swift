@@ -9,26 +9,28 @@ import Foundation
 import SwiftData
 
 @Model
-class TodayInfo {
-  @Attribute(.unique) let date: Date
-  let temperatureData: TemperatureSwiftDataModel
-  var missionList: [Mission]
-  
-  
-  public init(
-    date: Date = .now,
-    temperatureData: TemperatureSwiftDataModel,
-    missionList: [Mission]
-  ) {
-    self.date = date
-    self.temperatureData = temperatureData
-    self.missionList = missionList
-  }
+class DayInfo {
+    #Unique<DayInfo>([\.date])
+    let date: String
+    let temperatureData: TemperatureSwiftDataModel
+    var missionList: [Mission]
+    
+    
+    public init(
+        date: String,
+        temperatureData: TemperatureSwiftDataModel,
+        missionList: [Mission]
+    ) {
+        self.date = date
+        self.temperatureData = temperatureData
+        self.missionList = missionList
+    }
 }
 
 @Model
 class Mission {
-    @Attribute(.unique) let id: UUID
+    #Unique<Mission>([\.id])
+    let id: UUID
     let title: String
     let isClear: Bool
     
@@ -45,19 +47,20 @@ class Mission {
 
 @Model
 class TemperatureSwiftDataModel {
-  @Attribute(.unique) var id: UUID
-  let historicTemperature: Double
-  let currentTemperature: Double
-  
-  init(
-    id: UUID,
-    historicTemperature: Double,
-    currentTemperature: Double
-  ) {
-    self.id = id
-    self.historicTemperature = historicTemperature
-    self.currentTemperature = currentTemperature
-  }
+    #Unique<TemperatureSwiftDataModel>([\.id])
+    let id: UUID
+    let historicTemperature: Double
+    let currentTemperature: Double
+    
+    init(
+        id: UUID = UUID(),
+        historicTemperature: Double,
+        currentTemperature: Double
+    ) {
+        self.id = id
+        self.historicTemperature = historicTemperature
+        self.currentTemperature = currentTemperature
+    }
 }
 
 

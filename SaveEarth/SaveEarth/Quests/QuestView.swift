@@ -11,6 +11,16 @@ struct Quest: Identifiable, Equatable {
     var id: UUID
     var isChecked: Bool
     let questTitle: String
+    
+    init(
+        id: UUID = UUID(),
+        isChecked: Bool = false,
+        questTitle: String
+    ) {
+        self.id = id
+        self.isChecked = isChecked
+        self.questTitle = questTitle
+    }
 }
 
 struct QuestView: View {

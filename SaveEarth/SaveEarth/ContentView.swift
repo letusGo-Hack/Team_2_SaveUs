@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    
+    @Environment(\.modelContext) private var context
     @EnvironmentObject private var weatherManager: WeatherManager
+    @Query(sort: \DayInfo.date) var dayInfoCollection: [DayInfo]
     
     @State var desiredLatitude: CGFloat = 76.571640
     @State var desiredLongitude: CGFloat = -41.666646
@@ -69,34 +71,79 @@ struct ContentView: View {
         
         
         .task {
-            // TODO: SwiftData 체크
-            guard true else { return }
-
-            // TODO: API 요청 - 금일 데이터 없는 경우
-            do {
-                let fetchedData = try await weatherManager.fetchHistoricalTemperature(
-                    location: .init(
-                        latitude: desiredLatitude,
-                        longitude: desiredLongitude
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let currentDate = Date.now
+            let formattedDate = dateFormatter.string(from: currentDate)
+            
+            if let lastDate: String = dayInfoCollection.last?.date,
+               lastDate != formattedDate {
+                do {
+                    let fetchedData = try await weatherManager.fetchHistoricalTemperature(
+                        location: .init(
+                            latitude: desiredLatitude,
+                            longitude: desiredLongitude
+                        )
                     )
-                )
-                
-                print(fetchedData)
-                print("현재 \(fetchedData?.currentTemperature)")
-                print("평균 \(fetchedData?.historicTemperature)")
-                print("차이 \(fetchedData?.temperatureDeviation())")
-                
-                // TODO: SwiftData 개체 생성
-                
-                Task { @MainActor in
-                    isSetup.toggle()
+                    
+                    print(fetchedData)
+                    print("현재 \(fetchedData?.currentTemperature)")
+                    print("평균 \(fetchedData?.historicTemperature)")
+                    print("차이 \(fetchedData?.temperatureDeviation())")
+                    
+                    
+                    let dayInfo = DayInfo(
+                        date: formattedDate,
+                        temperatureData: .init(
+                            historicTemperature: fetchedData?.historicTemperature ?? 0.0,
+                            currentTemperature: fetchedData?.currentTemperature ?? 0.0
+                        ),
+                        missionList: makeMissionList(
+                            count: fetchedData?.temperatureDeviation() ?? 0
+                        )
+                    )
+                    
+                    context.insert(dayInfo)
+                    
+                    
+                    Task { @MainActor in
+                        isSetup.toggle()
+                    }
+                    
+                    
+                } catch {
+                    print("날씨정보 불러오기 실패\(error)")
+                    
                 }
-            } catch {
-                print("날씨정보 불러오기 실패\(error)")
-
             }
         }
     }
+    
+    func makeMissionList(
+        count: Int
+    ) -> [Mission] {
+        var mutableArray: [Quest] = [
+            .init(questTitle: "페트병 분리수거 하기"),
+            .init(questTitle: "에어컨 1도 낮추기"),
+            .init(questTitle: "오늘 하루 텀블러 사용하기"),
+            .init(questTitle: "종이컵 사용하지 않기"),
+            .init(questTitle: "대중교통 이용하기"),
+            .init(questTitle: "낮에는 전등 끄기"),
+            .init(questTitle: "사용하지 않는 콘센트 선 뽑아 놓기")
+        ]
+        let missionList = [Mission]()
+        
+        while missionList.count == count {
+            
+            // 배열에서 랜덤 인덱스 선택
+            let randomIndex = Int.random(in: 0..<mutableArray.count)
+            
+        }
+        
+        return missionList
+    }
+    
+    
     
 }
 

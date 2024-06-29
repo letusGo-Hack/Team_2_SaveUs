@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct SaveEarthApp: App {
@@ -16,6 +17,7 @@ struct SaveEarthApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(weatherManager)
+                .modelContainer(for: DayInfo.self)
         }
     }
 }

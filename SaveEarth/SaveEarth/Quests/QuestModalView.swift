@@ -10,7 +10,7 @@ import SwiftUI
 struct QuestModalView<Content: View>: View {
     @Binding var isPresented: Bool
     let content: Content
-    private var extraHeight: CGFloat = 20
+    private var safeBottomHeight: CGFloat = 20
     
     init(isPresented: Binding<Bool>, @ViewBuilder content: () -> Content) {
         self._isPresented = isPresented
@@ -33,13 +33,13 @@ struct QuestModalView<Content: View>: View {
                             .background(Color.blue)
                             .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                     }
-                    .padding(.bottom, extraHeight)
+                    .padding(.bottom, safeBottomHeight)
                     .padding(.horizontal)
                 }
                 .background(Color.white)
                 .cornerRadius(15)
                 .shadow(radius: 10)
-                .frame(width: geometry.size.width, height: geometry.size.height / 3 + extraHeight)
+                .frame(width: geometry.size.width, height: geometry.size.height / 3 + safeBottomHeight)
                 .gesture(
                     DragGesture()
                         .onChanged { value in
@@ -51,7 +51,7 @@ struct QuestModalView<Content: View>: View {
             }
         }
         .background(
-            Color.black.opacity(0.3)
+            Color.clear.opacity(0.3)
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     isPresented = false

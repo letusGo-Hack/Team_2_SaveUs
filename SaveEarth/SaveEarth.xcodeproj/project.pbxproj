@@ -24,6 +24,7 @@
 		DAD0E06B2C2FF3AC0022466D /* QuestModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0682C2FF3AC0022466D /* QuestModalView.swift */; };
 		DAD0E06C2C2FF3AC0022466D /* QuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0692C2FF3AC0022466D /* QuestView.swift */; };
 		DAD0E06F2C2FF4340022466D /* QuestFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E06D2C2FF4340022466D /* QuestFloatingButton.swift */; };
+		DAD0E0722C2FF8C90022466D /* ButtonAppearingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0E0712C2FF8C90022466D /* ButtonAppearingTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		DAD0E0682C2FF3AC0022466D /* QuestModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestModalView.swift; sourceTree = "<group>"; };
 		DAD0E0692C2FF3AC0022466D /* QuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestView.swift; sourceTree = "<group>"; };
 		DAD0E06D2C2FF4340022466D /* QuestFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestFloatingButton.swift; sourceTree = "<group>"; };
+		DAD0E0712C2FF8C90022466D /* ButtonAppearingTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAppearingTransition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 		DA5A5ECB2C2FB8D800955A9A /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				DAD0E0702C2FF8B30022466D /* Transition */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -231,6 +234,14 @@
 				DAD0E06D2C2FF4340022466D /* QuestFloatingButton.swift */,
 			);
 			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		DAD0E0702C2FF8B30022466D /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				DAD0E0712C2FF8C90022466D /* ButtonAppearingTransition.swift */,
+			);
+			path = Transition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +382,7 @@
 				DAD0E06C2C2FF3AC0022466D /* QuestView.swift in Sources */,
 				DAD0E06F2C2FF4340022466D /* QuestFloatingButton.swift in Sources */,
 				A9067BCA2C2FEA8700D13CA9 /* TemperatureGradient.swift in Sources */,
+				DAD0E0722C2FF8C90022466D /* ButtonAppearingTransition.swift in Sources */,
 				2CAC03432C2FE59A00CC47C6 /* TemperatureData.swift in Sources */,
 				2CAC03472C2FE7FA00CC47C6 /* WeatherManager.swift in Sources */,
 				DA5A5EDD2C2FBB4D00955A9A /* MapView.swift in Sources */,

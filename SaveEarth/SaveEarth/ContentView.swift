@@ -48,11 +48,18 @@ struct ContentView: View {
                 ProgressView()
             }
         }
+        .animation(.spring(), value: showQuestModal)
         .overlay(alignment: .top, content: {
-            QuestFloatingButton(numberOfQuests: UInt(self.quests.count)) {
-                self.showQuestModal = true
+            if !self.showQuestModal {
+                QuestFloatingButton(numberOfQuests: UInt(self.quests.count)) {
+                    self.showQuestModal = true
+                }
+                .transition(ButtonAppearingTransition())
             }
         })
+        .animation(.default, value: !showQuestModal)
+        
+        
         .task {
             // TODO: SwiftData 체크
             guard true else { return }

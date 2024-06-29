@@ -41,6 +41,7 @@ struct CheckboxToggleStyle: ToggleStyle {
                 Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
                     .foregroundColor(configuration.isOn ? .blue : .gray)
                 configuration.label
+                    .foregroundStyle(.black)
             }
         }
     }

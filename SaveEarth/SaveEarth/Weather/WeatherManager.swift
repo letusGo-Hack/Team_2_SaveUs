@@ -9,7 +9,7 @@ import CoreLocation
 import Foundation
 import WeatherKit
 
-final class WeatherManager {
+final class WeatherManager: ObservableObject {
   
   private let weatherService: WeatherService
   

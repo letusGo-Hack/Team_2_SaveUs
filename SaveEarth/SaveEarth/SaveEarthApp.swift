@@ -10,9 +10,12 @@ import SwiftUI
 @main
 struct SaveEarthApp: App {
     
+    let weatherManager: WeatherManager = .init()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(weatherManager)
         }
     }
 }

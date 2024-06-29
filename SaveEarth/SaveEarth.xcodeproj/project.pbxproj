@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CAC03432C2FE59A00CC47C6 /* TemperatureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC03422C2FE59A00CC47C6 /* TemperatureData.swift */; };
 		A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */; };
 		A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */; };
 		A9067B932C2FA81100D13CA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9067B922C2FA81100D13CA9 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		2CAC03402C2FC12600CC47C6 /* AppLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocation.swift; sourceTree = "<group>"; };
+		2CAC03422C2FE59A00CC47C6 /* TemperatureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureData.swift; sourceTree = "<group>"; };
 		A9067B892C2FA80F00D13CA9 /* SaveEarth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveEarth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9067B8C2C2FA80F00D13CA9 /* SaveEarthApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEarthApp.swift; sourceTree = "<group>"; };
 		A9067B8E2C2FA80F00D13CA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				2CAC03402C2FC12600CC47C6 /* AppLocation.swift */,
+				2CAC03422C2FE59A00CC47C6 /* TemperatureData.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				A9067B8F2C2FA80F00D13CA9 /* ContentView.swift in Sources */,
 				A9067B8D2C2FA80F00D13CA9 /* SaveEarthApp.swift in Sources */,
 				DA5A8DE72C2FCCCD00019D61 /* PolarMapProjection.swift in Sources */,
+				2CAC03432C2FE59A00CC47C6 /* TemperatureData.swift in Sources */,
 				DA5A5EDD2C2FBB4D00955A9A /* MapView.swift in Sources */,
 				DA5A5EDF2C2FBC2500955A9A /* ChartView.swift in Sources */,
 			);
@@ -492,7 +496,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saveus.SaveEarth;
+				PRODUCT_BUNDLE_IDENTIFIER = com.letusgo.saveus.saveearth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -520,7 +524,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saveus.SaveEarth;
+				PRODUCT_BUNDLE_IDENTIFIER = com.letusgo.saveus.saveearth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

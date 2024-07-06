@@ -9,9 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var context
     @EnvironmentObject private var weatherManager: WeatherManager
-    @Query(sort: \DayInfo.date) var dayInfoCollection: [DayInfo]
+    
+    @Environment(\.modelContext) private var context
+    @Query(sort: \DayInfo.date) var dayInfos: [DayInfo]
+    
+    @State private var dayInfo: DayInfo?
     
     @State var desiredLatitude: CGFloat = 76.571640
     @State var desiredLongitude: CGFloat = -41.666646
@@ -95,11 +98,11 @@ struct ContentView: View {
         .task {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
-            let currentDate = Date.now
-            let formattedDate = dateFormatter.string(from: currentDate)
+            let todayDateDescription = dateFormatter.string(from: Date.now)
             
-            if let lastDate: String = dayInfoCollection.last?.date,
-               lastDate != formattedDate {
+            if let dayInfo = dayInfos.first(where: { $0.date == todayDateDescription }) {
+                self.dayInfo = dayInfo
+            } else {
                 do {
                     let fetchedData = try await weatherManager.fetchHistoricalTemperature(
                         location: .init(

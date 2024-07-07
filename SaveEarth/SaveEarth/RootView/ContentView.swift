@@ -16,14 +16,10 @@ struct ContentView: View {
     
     @State private var dayInfo: DayInfo?
     
-    @State var latitude: CGFloat = 76.571640
-    @State var longitude: CGFloat = -41.666646
+    @State private var latitude: CGFloat = 76.571640
+    @State private var longitude: CGFloat = -41.666646
     
     @State private var isPresentedModal: Bool = false
-    @State private var allQuestCheck: Bool = false
-    
-    @State var current: Double = 0.0
-    @State var average: Double = 0.0
     
     var completion: Float {
         guard let dayInfo = self.dayInfo else { return .zero }
@@ -70,12 +66,12 @@ struct ContentView: View {
                         Spacer()
                         VStack(alignment: .leading) {
                             Text("현재온도")
-                            Text(String(format: "%.2f℃", current))
+                            Text(String(format: "%.2f℃", dayInfo.temperatureData.currentTemperature))
                         }
                         Spacer()
                         VStack(alignment: .leading) {
                             Text("평균온도")
-                            Text(String(format: "%.2f℃", average))
+                            Text(String(format: "%.2f℃", dayInfo.temperatureData.historicTemperature))
                         }
                         Spacer()
                     }
@@ -113,18 +109,19 @@ struct ContentView: View {
                     self.dayInfo = dayInfo
                 } else {
                     do {
-                        let fetchedData = try await weatherManager.fetchHistoricalTemperature(
+                        guard let fetchedData = try await weatherManager.fetchHistoricalTemperature(
                             location: .init(
                                 latitude: latitude,
                                 longitude: longitude
                             )
-                        )
+                        ) else {
+                            print("날씨 불러오기 실패 - 데이터 없음")
+                            return
+                        }
                         
                         Task { @MainActor in
-                            let currentTemperature = fetchedData?.currentTemperature ?? 0.0
-                            let historicTemperature = fetchedData?.historicTemperature ?? 0.0
-                            self.current = currentTemperature
-                            self.average = historicTemperature
+                            let currentTemperature = fetchedData.currentTemperature
+                            let historicTemperature = fetchedData.historicTemperature
                             
                             let count = abs(Int(historicTemperature - currentTemperature))
                             let dayInfo = DayInfo(
@@ -142,7 +139,7 @@ struct ContentView: View {
                         
                         
                     } catch {
-                        print("날씨정보 불러오기 실패\(error)")
+                        print("날씨정보 불러오기 실패 - \(error)")
                     }
                 }
             }

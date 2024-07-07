@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TemperatureGradient: View {
-    @Binding var complete: Float
+    let complete: Float
     
     var heightRatio: Float { complete == .zero ? 0.1 : (1 + complete) * 0.5 }
     var topColor: Color { heightRatio == 1.0 ? .white : .blue }
@@ -34,14 +34,14 @@ struct TemperatureGradient: View {
 }
 
 #Preview("complete 0") {
-    TemperatureGradient(complete: .constant(0))
+    TemperatureGradient(complete: 0)
 }
 
 #Preview("complete 0.5") {
-    TemperatureGradient(complete: .constant(0.5))
+    TemperatureGradient(complete: 0.5)
 }
 
 #Preview("complete 1") {
-    TemperatureGradient(complete: .constant(1))
+    TemperatureGradient(complete: 1)
 }
 

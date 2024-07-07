@@ -13,12 +13,12 @@ class Mission {
     #Unique<Mission>([\.id])
     let id: UUID
     let title: String
-    let isClear: Bool
+    var isClear: Bool
     
     init(
         id: UUID = UUID(),
         title: String,
-        isClear: Bool
+        isClear: Bool = false
     ) {
         self.id = id
         self.title = title

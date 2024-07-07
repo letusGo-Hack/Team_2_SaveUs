@@ -16,157 +16,163 @@ struct ContentView: View {
     
     @State private var dayInfo: DayInfo?
     
-    @State var desiredLatitude: CGFloat = 76.571640
-    @State var desiredLongitude: CGFloat = -41.666646
+    @State var latitude: CGFloat = 76.571640
+    @State var longitude: CGFloat = -41.666646
     
-    @State private var showQuestModal: Bool = false
+    @State private var isPresentedModal: Bool = false
     @State private var allQuestCheck: Bool = false
     
     @State var current: Double = 0.0
     @State var average: Double = 0.0
     
-    @State private var quests: [Quest] = [
-        .init(id: UUID(), isChecked: false, questTitle: "페트병 분리수거 하기 🫡"),
-        .init(id: UUID(), isChecked: false, questTitle: "에어컨 1도 낮추기 😎"),
-        .init(id: UUID(), isChecked: false, questTitle: "텀블러 사용하기 😙"),
-        .init(id: UUID(), isChecked: false, questTitle: "종이컵 쓰지 않기 😀")
-    ]
+    var completion: Float {
+        guard let dayInfo = self.dayInfo else { return .zero }
+        let isClearCount = dayInfo.missionList.filter({ $0.isClear }).count
+        
+        Task { @MainActor in
+            if isClearCount == dayInfo.missionList.count {
+                isPresentedModal = false
+            }
+        }
+        
+        return Float(isClearCount) / Float(dayInfo.missionList.count)
+    }
     
-    @State var isSetup: Bool = false
-    @State var completion: Float = 0.0
-    
-    var body: some View {
+    var content: some View {
         ZStack {
             MapView(
-                lat: $desiredLatitude,
-                lon: $desiredLongitude, 
-                isFire: completion != 1
+                latitude: $latitude,
+                longitude: $longitude
             )
-            
-            TemperatureGradient(complete: $completion)
-                .ignoresSafeArea()
-            if isSetup {
-                if showQuestModal {
-                    QuestModalView(isPresented: $showQuestModal) {
-                        QuestView(quests: $quests, isPresented: $showQuestModal)
-                    }
-                    .transition(.move(edge: .bottom))
-                    .animation(.default, value: showQuestModal)
-                    .ignoresSafeArea(edges: .bottom)
+            .overlay {
+                TemperatureGradient(complete: completion)
+                    .ignoresSafeArea()
+            }
+            .overlay {
+                if let dayInfo =  self.dayInfo, dayInfo.missionList.allSatisfy({ $0.isClear }) {
+                    CompleteQuestView()
+                        .transition(CompleteRotatingTransition())
                 } else {
-                    if self.quests.map({ $0.isChecked }).allSatisfy({ $0 == true }) {
-                        CompleteQuestView()
-                            .transition(CompleteRotatingTransition())
+                    Image(systemName: "flame.fill")
+                        .foregroundColor(.red)
+                        .font(.largeTitle)
+                }
+            }
+            if let dayInfo = dayInfo {
+                VStack {
+                    Text(completion != 1 ? "뜨거운 지구를 구해주세요!! 😱" : "오늘도 지구를 조금 살려냈어요!")
+                        .font(.title)
+                        .padding(.vertical)
+                    Text("Temperature 🌡️")
+                        .font(.title2)
+                        .padding()
+                    HStack {
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text("현재온도")
+                            Text(String(format: "%.2f℃", current))
+                        }
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text("평균온도")
+                            Text(String(format: "%.2f℃", average))
+                        }
+                        Spacer()
+                    }
+                    .font(.title2)
+                    Spacer()
+                    if !isPresentedModal, !dayInfo.missionList.allSatisfy({ $0.isClear }) {
+                        QuestFloatingButton(numberOfQuests: UInt(dayInfo.missionList.count)) {
+                            self.isPresentedModal = true
+                        }
+                        .transition(AppearingTransition())
+                        .animation(.spring(), value: isPresentedModal)
                     }
                 }
             } else {
                 ProgressView()
             }
         }
-        .animation(.spring(), value: showQuestModal)
-        .overlay {
-            VStack {
-                Text(completion != 1 ? "뜨거운 지구를 구해주세요!! 😱" : "오늘도 지구를 조금 살려냈어요!")
-                    .font(.title2)
-                    .padding(.bottom)
-                VStack(alignment: .leading) {
-                    Text("Temperature 🌡️")
-                    Text("Current: " + String(format: "%.2f", current) + "℃")
-                    Text("Average: " + String(format: "%.2f", average) + "℃")
-                }
-                .font(.title)
-                .padding(.leading)
-                .padding(.bottom, 60)
-                Spacer()
-                if !self.showQuestModal &&
-                    !self.quests.map({ $0.isChecked }).allSatisfy({ $0 == true }) {
-                    QuestFloatingButton(numberOfQuests: UInt(self.quests.count)) {
-                        self.showQuestModal = true
-                    }
-                    .transition(AppearingTransition())
-                }
-            }
-        }
-        .animation(.default, value: !showQuestModal)
-        .onChange(of: quests) { oldValue, newValue in
-            let isCheckedCount = newValue.filter({ $0.isChecked }).count
-            completion = Float(isCheckedCount) / Float(quests.count)
-            if isCheckedCount == newValue.count {
-                showQuestModal.toggle()
-            }
-        }
-        .task {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let todayDateDescription = dateFormatter.string(from: Date.now)
-            
-            if let dayInfo = dayInfos.first(where: { $0.date == todayDateDescription }) {
-                self.dayInfo = dayInfo
-            } else {
-                do {
-                    let fetchedData = try await weatherManager.fetchHistoricalTemperature(
-                        location: .init(
-                            latitude: desiredLatitude,
-                            longitude: desiredLongitude
-                        )
-                    )
-                    
-                    print(fetchedData)
-                    print("현재 \(fetchedData?.currentTemperature)")
-                    print("평균 \(fetchedData?.historicTemperature)")
-                    print("차이 \(fetchedData?.temperatureDeviation())")
-                    
-            
-                    Task { @MainActor in
-                        current = fetchedData?.currentTemperature ?? 0.0
-                        average = fetchedData?.historicTemperature ?? 0.0
-                        
-                        
-                        isSetup.toggle()
-                    }
-                    
-                    
-                } catch {
-                    print("날씨정보 불러오기 실패\(error)")
-                }
-            }
+        .sheet(isPresented: $isPresentedModal) {
+            MissionList(
+                missions: .init(get: { dayInfo?.missionList ?? [] }, set: { dayInfo?.missionList = $0 }),
+                isPresented: $isPresentedModal
+            )
+            .presentationDetents([.medium, .large])
         }
     }
     
-    func makeMissionList(
+    var body: some View {
+        content
+            .task {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let todayDateDescription = dateFormatter.string(from: Date.now)
+                
+                if let dayInfo = dayInfos.first(where: { $0.date == todayDateDescription }) {
+                    self.dayInfo = dayInfo
+                } else {
+                    do {
+                        let fetchedData = try await weatherManager.fetchHistoricalTemperature(
+                            location: .init(
+                                latitude: latitude,
+                                longitude: longitude
+                            )
+                        )
+                        
+                        Task { @MainActor in
+                            let currentTemperature = fetchedData?.currentTemperature ?? 0.0
+                            let historicTemperature = fetchedData?.historicTemperature ?? 0.0
+                            self.current = currentTemperature
+                            self.average = historicTemperature
+                            
+                            let count = abs(Int(historicTemperature - currentTemperature))
+                            let dayInfo = DayInfo(
+                                date: todayDateDescription,
+                                temperatureData: .init(
+                                    historicTemperature: historicTemperature,
+                                    currentTemperature: currentTemperature
+                                ),
+                                missionList: Mission.makeMissionList(count: count > 5 ? 5 : count)
+                            )
+                            
+                            self.dayInfo = dayInfo
+                            // TODO: SwiftData 추가
+                        }
+                        
+                        
+                    } catch {
+                        print("날씨정보 불러오기 실패\(error)")
+                    }
+                }
+            }
+    }
+    
+}
+
+fileprivate extension Mission {
+    
+    static func makeMissionList(
         count: Int
     ) -> [Mission] {
-        var questList: [Quest] = [
-            .init(questTitle: "페트병 분리수거 하기"),
-            .init(questTitle: "에어컨 1도 낮추기"),
-            .init(questTitle: "오늘 하루 텀블러 사용하기"),
-            .init(questTitle: "종이컵 사용하지 않기"),
-            .init(questTitle: "대중교통 이용하기"),
-            .init(questTitle: "낮에는 전등 끄기"),
-            .init(questTitle: "사용하지 않는 콘센트 선 뽑아 놓기")
+        let questList: [String] = [
+            "페트병 분리수거 하기 🫡",
+            "에어컨 1도 낮추기 😎",
+            "오늘 하루 텀블러 사용하기 😙",
+            "종이컵 사용하지 않기",
+            "대중교통 이용하기",
+            "낮에는 전등 끄기",
+            "사용하지 않는 콘센트 선 뽑아 놓기"
         ]
-        var missionList = [Mission]()
+        var indexes = Set<Int>()
         
-        while missionList.count == count {
-            
-            // 배열에서 랜덤 인덱스 선택
+        while indexes.count < count {
             let randomIndex = Int.random(in: 0..<questList.count)
-            let randomItem = questList[randomIndex]
-            if missionList.contains(where: { $0.title == randomItem.questTitle }) {
-                continue
-            }
-            missionList.append(
-                .init(
-                    title: randomItem.questTitle,
-                    isClear: randomItem.isChecked
-                )
-            )
+            indexes.update(with: randomIndex)
         }
         
-        return missionList
+        return indexes.map({ Mission(title: questList[$0]) })
     }
-    
-    
     
 }
 

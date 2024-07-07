@@ -14,7 +14,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \DayInfo.date) var dayInfos: [DayInfo]
     
-    @State private var dayInfo: DayInfo?
+    private var dayInfo: DayInfo? { dayInfos.first(where: { $0.date == Date.now.DataDescription }) }
     
     @State private var latitude: CGFloat = 76.571640
     @State private var longitude: CGFloat = -41.666646
@@ -47,7 +47,6 @@ struct ContentView: View {
             .overlay {
                 if let dayInfo =  self.dayInfo, dayInfo.missionList.allSatisfy({ $0.isClear }) {
                     CompleteQuestView()
-                        .transition(CompleteRotatingTransition())
                 } else {
                     Image(systemName: "flame.fill")
                         .foregroundColor(.red)
@@ -79,7 +78,7 @@ struct ContentView: View {
                     Spacer()
                     if !isPresentedModal, !dayInfo.missionList.allSatisfy({ $0.isClear }) {
                         QuestFloatingButton(numberOfQuests: UInt(dayInfo.missionList.count)) {
-                            self.isPresentedModal = true
+                            isPresentedModal.toggle()
                         }
                         .transition(AppearingTransition())
                         .animation(.spring(), value: isPresentedModal)
@@ -91,23 +90,34 @@ struct ContentView: View {
         }
         .sheet(isPresented: $isPresentedModal) {
             MissionList(
-                missions: .init(get: { dayInfo?.missionList ?? [] }, set: { dayInfo?.missionList = $0 }),
+                missions: .init(
+                    get: { dayInfo?.missionList ?? [] },
+                    set: {
+                        guard let dayInfo = dayInfo,
+                              let index = dayInfos.firstIndex(of: dayInfo)
+                        else {
+                            print($0)
+                            return
+                        }
+                        print("set \($0)")
+                        dayInfos[index].missionList = $0
+                        try? context.save()
+                    }
+                ),
                 isPresented: $isPresentedModal
             )
-            .presentationDetents([.medium, .large])
+            .presentationDetents([.height(260)])
         }
     }
     
     var body: some View {
         content
             .task {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let todayDateDescription = dateFormatter.string(from: Date.now)
+                let todayDateDescription = Date.now.DataDescription
+                print("DataDescription \(todayDateDescription)")
+                print(dayInfos.map(\.date))
                 
-                if let dayInfo = dayInfos.first(where: { $0.date == todayDateDescription }) {
-                    self.dayInfo = dayInfo
-                } else {
+                if dayInfo == nil {
                     do {
                         guard let fetchedData = try await weatherManager.fetchHistoricalTemperature(
                             location: .init(
@@ -133,16 +143,24 @@ struct ContentView: View {
                                 missionList: Mission.makeMissionList(count: count > 5 ? 5 : count)
                             )
                             
-                            self.dayInfo = dayInfo
-                            // TODO: SwiftData 추가
+                            context.insert(dayInfo)
+                            print("Fetched Data")
                         }
-                        
-                        
                     } catch {
                         print("날씨정보 불러오기 실패 - \(error)")
                     }
                 }
             }
+    }
+    
+}
+
+fileprivate extension Date {
+    
+    var DataDescription: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: self)
     }
     
 }

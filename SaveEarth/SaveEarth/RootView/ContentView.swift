@@ -14,14 +14,14 @@ struct ContentView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \DayInfo.date) var dayInfos: [DayInfo]
     
-    private var dayInfo: DayInfo? { dayInfos.first(where: { $0.date == Date.now.DataDescription }) }
+    private var dayInfo: DayInfo? { dayInfos.first(where: { $0.date == Date.now.dateDescription }) }
     
     @State private var latitude: CGFloat = 76.571640
     @State private var longitude: CGFloat = -41.666646
     
     @State private var isPresentedModal: Bool = false
     
-    var completion: Float {
+    var completeRate: Float {
         guard let dayInfo = self.dayInfo else { return .zero }
         let isClearCount = dayInfo.missionList.filter({ $0.isClear }).count
         
@@ -34,14 +34,14 @@ struct ContentView: View {
         return Float(isClearCount) / Float(dayInfo.missionList.count)
     }
     
-    var content: some View {
+    var content: some View { // UI 그리기
         ZStack {
             MapView(
                 latitude: $latitude,
                 longitude: $longitude
             )
             .overlay {
-                TemperatureGradient(complete: completion)
+                TemperatureGradient(complete: completeRate)
                     .ignoresSafeArea()
             }
             .overlay {
@@ -55,7 +55,7 @@ struct ContentView: View {
             }
             if let dayInfo = dayInfo {
                 VStack {
-                    Text(completion != 1 ? "뜨거운 지구를 구해주세요!! 😱" : "오늘도 지구를 조금 살려냈어요!")
+                    Text(completeRate != 1 ? "뜨거운 지구를 구해주세요!! 😱" : "오늘도 지구를 조금 살려냈어요!")
                         .font(.title)
                         .padding(.vertical)
                     Text("Temperature 🌡️")
@@ -77,7 +77,7 @@ struct ContentView: View {
                     .font(.title2)
                     Spacer()
                     if !isPresentedModal, !dayInfo.missionList.allSatisfy({ $0.isClear }) {
-                        QuestFloatingButton(numberOfQuests: UInt(dayInfo.missionList.count)) {
+                        QuestFloatingButton(numberOfQuests: UInt(dayInfo.missionList.filter({ !$0.isClear }).count)) {
                             isPresentedModal.toggle()
                         }
                         .transition(AppearingTransition())
@@ -96,26 +96,22 @@ struct ContentView: View {
                         guard let dayInfo = dayInfo,
                               let index = dayInfos.firstIndex(of: dayInfo)
                         else {
-                            print($0)
                             return
                         }
-                        print("set \($0)")
                         dayInfos[index].missionList = $0
                         try? context.save()
                     }
                 ),
                 isPresented: $isPresentedModal
             )
-            .presentationDetents([.height(260)])
+            .presentationDetents([.height(260)]) // TODO: 화면 비율 등 기준 필요
         }
     }
     
-    var body: some View {
+    var body: some View { // View 전처리 또는 의존성 주입 등 ex) onAppear, onDisAppear
         content
             .task {
-                let todayDateDescription = Date.now.DataDescription
-                print("DataDescription \(todayDateDescription)")
-                print(dayInfos.map(\.date))
+                let todayDateDescription = Date.now.dateDescription
                 
                 if dayInfo == nil {
                     do {
@@ -144,7 +140,6 @@ struct ContentView: View {
                             )
                             
                             context.insert(dayInfo)
-                            print("Fetched Data")
                         }
                     } catch {
                         print("날씨정보 불러오기 실패 - \(error)")
@@ -157,7 +152,7 @@ struct ContentView: View {
 
 fileprivate extension Date {
     
-    var DataDescription: String {
+    var dateDescription: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: self)

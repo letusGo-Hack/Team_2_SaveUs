@@ -43,7 +43,7 @@ struct MissionList: View {
         }
         .onChange(of: missions) { oldValue, newValue in
             if newValue.allSatisfy({ $0.isClear }) {
-                self.isPresented = false
+                isPresented = false
             }
         }
     }

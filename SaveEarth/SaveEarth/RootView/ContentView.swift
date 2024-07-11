@@ -18,7 +18,6 @@ struct ContentView: View {
     
     @State private var latitude: CGFloat = 76.571640
     @State private var longitude: CGFloat = -41.666646
-    
     @State private var isPresentedModal: Bool = false
     
     var completeRate: Float {

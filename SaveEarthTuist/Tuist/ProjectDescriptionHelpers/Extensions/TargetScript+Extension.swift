@@ -9,8 +9,22 @@ import ProjectDescription
 
 public extension TargetScript {
   
-  static func prebuildScript(scriptPath: Path, name: String) -> TargetScript {
-    return .pre(script: scriptPath.pathString, name: name)
+  enum UtilityTool {
+    case swiftGen
+    case swiftLint
+    
+    var scriptCommand: String {
+      switch self {
+      case .swiftGen:
+        return "${PROJECT_DIR}/../../Tools/swiftgen config run --config \"${PROJECT_DIR}/SaveEarth/Resources/swiftgen.yml\""
+      case .swiftLint:
+        return ""
+      }
+    }
+  }
+  
+  static func prebuildScript(utility: UtilityTool, name: String) -> TargetScript {
+    return .pre(script: utility.scriptCommand, name: name)
   }
   
 }

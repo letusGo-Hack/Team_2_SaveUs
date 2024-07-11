@@ -19,8 +19,7 @@ extension Project {
     let targets = makeAppTargets(
       name: name,
       scripts: [
-        .prebuildScript(scriptPath: .scriptPath("swiftgen"), name: "Gen"),
-        .prebuildScript(scriptPath: .scriptPath("swiftlint"), name: "Gen"),
+        .prebuildScript(utility: .swiftGen, name: "Gen")
       ],
       dependencies: dependencies,
       testDependencies: testDependencies

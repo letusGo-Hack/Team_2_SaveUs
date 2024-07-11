@@ -1,6 +1,5 @@
 // swift-tools-version: 5.9
 @preconcurrency import PackageDescription
-import ProjectDescriptionHelpers
 
 #if TUIST
 @preconcurrency import ProjectDescription
@@ -8,14 +7,7 @@ import ProjectDescriptionHelpers
 let packageSettings = PackageSettings(
   productTypes: [
     "ComposableArchitecture": .framework
-  ],
-  baseSettings: .settings(
-    base: [:],
-    configurations: Configuration
-      .configure(
-        configurations: Configuration.ConfigScheme.allCases
-      )
-  )
+  ]
 )
 #endif
 

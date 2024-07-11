@@ -182,7 +182,6 @@ fileprivate extension Mission {
         
         return indexes.map({ Mission(title: questList[$0]) })
     }
-    
 }
 
 #Preview {

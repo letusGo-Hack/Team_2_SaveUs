@@ -156,7 +156,6 @@ fileprivate extension Date {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: self)
     }
-    
 }
 
 fileprivate extension Mission {

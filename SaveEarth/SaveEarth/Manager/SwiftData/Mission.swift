@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Mission {
+final class Mission {
     #Unique<Mission>([\.id])
     let id: UUID
     let title: String

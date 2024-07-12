@@ -18,7 +18,7 @@ public extension TargetScript {
       case .swiftGen:
         return "${PROJECT_DIR}/../../Tools/swiftgen config run --config \"${PROJECT_DIR}/SaveEarth/Resources/swiftgen.yml\""
       case .swiftLint:
-        return ""
+        return "${PROJECT_DIR}/../../Tools/swiftlint --config \"${PROJECT_DIR}/SaveEarth/Resources/swiftlint.yml\""
       }
     }
   }

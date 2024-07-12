@@ -19,7 +19,8 @@ extension Project {
     let targets = makeAppTargets(
       name: name,
       scripts: [
-        .prebuildScript(utility: .swiftGen, name: "Gen")
+        .prebuildScript(utility: .swiftGen, name: "Gen"),
+        .prebuildScript(utility: .swiftLint, name: "Lint")
       ],
       dependencies: dependencies,
       testDependencies: testDependencies
@@ -36,8 +37,6 @@ extension Project {
     productName: String? = productName,
     bundleId: String = bundleId,
     deploymentTargets: DeploymentTargets? = deployTarget,
-//    sources: SourceFilesList? = ["Sources/**"],
-//    resources: ResourceFileElements? = ["Resources/**"],
     scripts: [TargetScript],
     dependencies: [TargetDependency],
     testDependencies: [TargetDependency],

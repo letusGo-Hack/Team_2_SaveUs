@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct CheckboxToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        Button(action: {
-            configuration.isOn.toggle()
-        }) {
-            HStack {
-                Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
-                    .foregroundColor(configuration.isOn ? .blue : .gray)
-                configuration.label
-                    .foregroundStyle(.black)
-            }
-        }
+  func makeBody(configuration: Configuration) -> some View {
+    Button(action: {
+      configuration.isOn.toggle()
+    }) {
+      HStack {
+        Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
+          .foregroundColor(configuration.isOn ? .blue : .gray)
+        configuration.label
+          .foregroundStyle(.black)
+      }
     }
+  }
 }

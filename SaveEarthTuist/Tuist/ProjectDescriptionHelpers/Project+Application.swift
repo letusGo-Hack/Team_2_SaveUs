@@ -71,17 +71,6 @@ extension Project {
       dependencies: testDependencies
     )
     
-    let sampleAppTarget: Target = .target(
-      name: "\(name)SampleApp",
-      destinations: destinations,
-      product: .app,
-      bundleId: "\(bundleId)SampleApp",
-      infoPlist: .file(path: .plistPath("SaveEarthTestsInfo")),
-      sources: ["SaveEarthSampleApp/Sources/**"],
-      resources: ["SaveEarthSampleApp/Resources/**"],
-      scripts: scripts
-    )
-    
-    return [mainTarget, testTarget, sampleAppTarget]
+    return [mainTarget, testTarget]
   }
 }

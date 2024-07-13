@@ -33,8 +33,6 @@ struct DataPoint: Identifiable {
 extension DataPoint {
   static var mockData: [Self] = [
     .init(index: 0, id: 1, xLongitude: Angle(degrees: -42.022052), yLatitude: Angle(degrees: 75.743682))
-    
-    
   ]
   //.init(index: 0, id: 1, xLongitude: Angle(degrees: 75.743682), yLatitude: Angle(degrees: ))
 }

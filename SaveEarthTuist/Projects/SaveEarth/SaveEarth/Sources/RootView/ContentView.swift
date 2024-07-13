@@ -147,7 +147,6 @@ struct ContentView: View {
         }
       }
   }
-  
 }
 
 fileprivate extension Date {
@@ -157,7 +156,6 @@ fileprivate extension Date {
     dateFormatter.dateFormat = "yyyy-MM-dd"
     return dateFormatter.string(from: self)
   }
-  
 }
 
 fileprivate extension Mission {
@@ -183,7 +181,6 @@ fileprivate extension Mission {
     
     return indexes.map({ Mission(title: questList[$0]) })
   }
-  
 }
 
 #Preview {

@@ -14,8 +14,7 @@ class DayInfo {
   let date: String
   let temperatureData: TemperatureSwiftDataModel
   var missionList: [Mission]
-  
-  
+
   public init(
     date: String,
     temperatureData: TemperatureSwiftDataModel,

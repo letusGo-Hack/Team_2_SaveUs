@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class DayInfo {
+final class DayInfo {
   #Unique<DayInfo>([\.date])
   let date: String
   let temperatureData: TemperatureSwiftDataModel

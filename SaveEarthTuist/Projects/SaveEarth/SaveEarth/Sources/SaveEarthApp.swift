@@ -10,14 +10,14 @@ import SwiftData
 
 @main
 struct SaveEarthApp: App {
-    
-    let weatherManager: WeatherManager = .init()
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environmentObject(weatherManager)
-                .modelContainer(for: DayInfo.self)
-        }
+  
+  let weatherManager: WeatherManager = .init()
+  
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
+        .environmentObject(weatherManager)
+        .modelContainer(for: DayInfo.self)
     }
+  }
 }

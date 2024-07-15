@@ -18,7 +18,6 @@ struct ContentView: View {
     
     @State private var latitude: CGFloat = 76.571640
     @State private var longitude: CGFloat = -41.666646
-    
     @State private var isPresentedModal: Bool = false
     
     var completeRate: Float {
@@ -157,7 +156,6 @@ fileprivate extension Date {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: self)
     }
-    
 }
 
 fileprivate extension Mission {
@@ -183,7 +181,6 @@ fileprivate extension Mission {
         
         return indexes.map({ Mission(title: questList[$0]) })
     }
-    
 }
 
 #Preview {

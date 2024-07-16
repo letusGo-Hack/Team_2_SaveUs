@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class TemperatureSwiftDataModel {
+final class TemperatureSwiftDataModel {
     #Unique<TemperatureSwiftDataModel>([\.id])
     let id: UUID
     let historicTemperature: Double

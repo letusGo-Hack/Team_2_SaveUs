@@ -22,7 +22,7 @@ extension Path {
   }
   
   public static func scriptPath(_ scriptName: String) -> Path {
-    return .relativeToRoot("SaveEarthTuist/Tools/\(scriptName)")
+    return .relativeToRoot("SaveEarth/Tools/\(scriptName)")
   }
   
 }

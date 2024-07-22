@@ -10,18 +10,18 @@ import SwiftData
 
 @Model
 final class Mission {
-    #Unique<Mission>([\.id])
-    let id: UUID
-    let title: String
-    var isClear: Bool
-    
-    init(
-        id: UUID = UUID(),
-        title: String,
-        isClear: Bool = false
-    ) {
-        self.id = id
-        self.title = title
-        self.isClear = isClear
-    }
+  #Unique<Mission>([\.id])
+  let id: UUID
+  let title: String
+  var isClear: Bool
+
+  init(
+    id: UUID = UUID(),
+    title: String,
+    isClear: Bool = false
+  ) {
+    self.id = id
+    self.title = title
+    self.isClear = isClear
+  }
 }

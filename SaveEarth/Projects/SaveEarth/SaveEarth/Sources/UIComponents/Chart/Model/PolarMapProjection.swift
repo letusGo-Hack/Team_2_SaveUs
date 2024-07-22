@@ -17,17 +17,17 @@ struct Angle {
 
 // Azimuthal Equidistant Projection centered on the North Pole
 struct PolarProjection: Sendable {
-  var x: Double
-  var y: Double
-  
+  var xPoint: Double
+  var yPoint: Double
+
   init(xLongitude: Angle, yLatitude: Angle) {
     let centralLatitude = Angle(degrees: 90.0).radians
     let lambda = xLongitude.radians
     let phi = yLatitude.radians
     let rho = centralLatitude - phi
     let theta = lambda
-    
-    self.x = rho * sin(theta)
-    self.y = -rho * cos(theta)
+
+    self.xPoint = rho * sin(theta)
+    self.yPoint = -rho * cos(theta)
   }
 }

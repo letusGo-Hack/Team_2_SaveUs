@@ -50,7 +50,16 @@ extension Project {
       productName: productName,
       bundleId: bundleId,
       deploymentTargets: deploymentTargets,
-      infoPlist: .file(path: .plistPath("SaveEarthInfo")),
+      infoPlist: .extendingDefault(with: [
+        "CFBundleDevelopmentRegion": "ko_KR",
+        "CFBundleShortVersionString": "1.0.0",
+        "CFBundleVersion": "1",
+        "UILaunchStoryboardName": "LaunchScreen",
+        "CFBundleIconName": "AppIcon",
+        "NSAppTransportSecurity": [
+          "NSAllowsArbitraryLoads": true
+        ]
+      ]),
       sources: ["SaveEarth/Sources/**"],
       resources: ["SaveEarth/Resources/**"],
       entitlements: .file(path: .entitlementPath("SaveEarth")),

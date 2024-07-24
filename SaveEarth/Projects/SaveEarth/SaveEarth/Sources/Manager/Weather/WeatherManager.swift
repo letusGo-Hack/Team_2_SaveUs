@@ -10,13 +10,13 @@ import Foundation
 import WeatherKit
 
 final class WeatherManager: ObservableObject {
-  
+
   private let weatherService: WeatherService
-  
+
   init() {
     self.weatherService = WeatherService()
   }
-  
+
   /// 평균 온도와, 현재 온도 반환
   ///
   /// - Parameters:

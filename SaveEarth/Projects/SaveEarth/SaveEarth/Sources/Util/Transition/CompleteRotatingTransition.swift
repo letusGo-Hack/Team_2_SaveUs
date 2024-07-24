@@ -20,4 +20,3 @@ struct CompleteRotatingTransition: Transition {
             .blur(radius: phase.isIdentity ? 0 : 10)
     }
 }
-

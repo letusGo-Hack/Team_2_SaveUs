@@ -10,18 +10,18 @@ import SwiftData
 
 @Model
 final class TemperatureSwiftDataModel {
-    #Unique<TemperatureSwiftDataModel>([\.id])
-    let id: UUID
-    let historicTemperature: Double
-    let currentTemperature: Double
-    
-    init(
-        id: UUID = UUID(),
-        historicTemperature: Double,
-        currentTemperature: Double
-    ) {
-        self.id = id
-        self.historicTemperature = historicTemperature
-        self.currentTemperature = currentTemperature
-    }
+  #Unique<TemperatureSwiftDataModel>([\.id])
+  let id: UUID
+  let historicTemperature: Double
+  let currentTemperature: Double
+
+  init(
+    id: UUID = UUID(),
+    historicTemperature: Double,
+    currentTemperature: Double
+  ) {
+    self.id = id
+    self.historicTemperature = historicTemperature
+    self.currentTemperature = currentTemperature
+  }
 }

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct TemperatureGradient: View {
     let complete: Float
-    
+
     var heightRatio: Float { complete == .zero ? 0.1 : (1 + complete) * 0.5 }
     var topColor: Color { heightRatio == 1.0 ? .white : .blue }
     var middleColor: Color { heightRatio == 1.0 ? .blue : .yellow }
-    
+
     var body: some View {
         MeshGradient(
             width: 3,
@@ -44,4 +44,3 @@ struct TemperatureGradient: View {
 #Preview("complete 1") {
     TemperatureGradient(complete: 1)
 }
-

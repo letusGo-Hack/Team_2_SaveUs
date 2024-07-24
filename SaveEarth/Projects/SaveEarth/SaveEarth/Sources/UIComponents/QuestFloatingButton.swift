@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct QuestFloatingButton: View {
-    
+
     var numberOfQuests: UInt
     let buttonAction: () -> Void
-    
+
     var body: some View {
         Button {
             buttonAction()

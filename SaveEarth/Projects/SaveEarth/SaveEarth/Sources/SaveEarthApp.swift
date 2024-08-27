@@ -15,9 +15,15 @@ struct SaveEarthApp: App {
 
   var body: some Scene {
     WindowGroup {
-      ContentView()
-        .environmentObject(weatherManager)
-        .modelContainer(for: DayInfo.self)
+      RootView(
+        store: .init(
+          initialState: RootFeature.State()
+        ) {
+          RootFeature()
+        }
+      )
+      .environmentObject(weatherManager)
+      .modelContainer(for: DayInfo.self)
     }
   }
 }

@@ -14,12 +14,40 @@ struct SettingView: View {
   var body: some View {
     VStack {
       Text("설정 화면")
-      Button(
-        action: { store.send(.dismiss) },
-        label: {
-          Text("pop")
-        }
-      )
+      Spacer()
+      Text("의존성 주입 값: \(store.state.exampleMessage)")
+      Spacer()
+      HStack {
+        Spacer()
+        Button(
+          action: { store.send(.pushSettingView) },
+          label: {
+            Text("설정화면 추가")
+          }
+        )
+        Spacer()
+        Button(
+          action: { store.send(.controlViewStack(.pop())) },
+          label: {
+            Text("pop")
+          }
+        )
+        Spacer()
+        Button(
+          action: { store.send(.controlViewStack(.pop(2))) },
+          label: {
+            Text("pop count 2")
+          }
+        )
+        Spacer()
+        Button(
+          action: { store.send(.controlViewStack(.popToRoot)) },
+          label: {
+            Text("popToRoot")
+          }
+        )
+        Spacer()
+      }
     }
   }
 }

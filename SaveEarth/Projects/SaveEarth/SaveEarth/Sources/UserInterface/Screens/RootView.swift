@@ -17,16 +17,26 @@ struct RootView: View {
     ) {
       Button(
         action: {
-          store.send(.push(.setting))
+          Deeplink.openSelf(path: "push/setting?exampleMessage=1")
         },
         label: {
-          Text("설정 화면 이동 \(store.state.path.count)")
+          Text("설정 화면 이동")
         }
       )
     } destination: { store in
       switch store.case {
         case .setting(let store):
           SettingView(store: store)
+      }
+    }
+    .onOpenURL { deeplink in
+      print(deeplink) // FIXME: 확인 LOG
+      guard let urlComponents = URLComponents(string: deeplink.absoluteString) else {
+        return
+      }
+
+      if let viewStackControl = ViewStackControl(of: urlComponents) { // ViewStackControl
+        store.send(.controlViewStack(viewStackControl))
       }
     }
   }

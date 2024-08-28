@@ -12,11 +12,14 @@ import SwiftUI
 struct SettingFeature {
 
   @ObservableState
-  struct State { }
+  struct State {
+    var exampleMessage: Int
+  }
 
   enum Action {
     case setup
-    case dismiss
+    case controlViewStack(ViewStackControl)
+    case pushSettingView
   }
 
   var body: some ReducerOf<Self> {
@@ -25,10 +28,14 @@ struct SettingFeature {
         case .setup:
           return .none
 
-        case .dismiss:
-          // pop 동작 추가
-          print("dismiss")
+        case .controlViewStack(let control):
+          Deeplink.open(of: control)
           return .none
+
+        case .pushSettingView:
+          let dependencyNumber = state.exampleMessage + 1
+          let settingView: Screen = .setting(.init(exampleMessage: dependencyNumber))
+          return .send(.controlViewStack(.push([settingView])))
       }
     }
   }

@@ -16,18 +16,30 @@ struct RootFeature {
   }
   enum Action {
     case path(StackActionOf<Path>)
-    case push(Screen)
+    case controlViewStack(ViewStackControl)
   }
   var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
-        case .push(let screen):
-          let path: Path.State
-          switch screen {
-            case .setting: path = .setting(.init())
+        case .controlViewStack(let control):
+          switch control {
+            case .push(let screens):
+              let paths: [Path.State] = screens.map({
+                switch $0 {
+                  case .setting(let state): return .setting(state)
+                }
+              })
+              state.path.append(contentsOf: paths)
+              return .none
+
+            case .pop(let count):
+              state.path.removeLast(count)
+              return .none
+
+            case .popToRoot:
+              state.path.removeAll()
+              return .none
           }
-          state.path.append(path)
-          return .none
 
         case .path:
           return .none

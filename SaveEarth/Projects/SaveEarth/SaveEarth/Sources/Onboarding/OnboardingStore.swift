@@ -9,7 +9,9 @@ import ComposableArchitecture
 
 @Reducer
 struct OnboardingStore {
-  /// State
+
+  // MARK: - State
+
   @ObservableState
   struct State: Equatable {
     var currentPage: Int = 0
@@ -44,14 +46,16 @@ struct OnboardingStore {
     }
   }
 
-  /// Action
+  // MARK: - Action
+
   enum Action {
     case setPage(Int)
     case moveToNextpage
     case startApp
   }
 
-  /// Body
+  // MARK: - Body
+
   var body: some Reducer<State, Action> {
     Reduce { state, action in
       switch action {

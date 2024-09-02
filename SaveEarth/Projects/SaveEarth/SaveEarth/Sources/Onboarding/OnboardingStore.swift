@@ -50,8 +50,7 @@ struct OnboardingStore {
 
   enum Action {
     case setPage(Int)
-    case moveToNextpage
-    case startApp
+    case appButtonTapped
   }
 
   // MARK: - Body
@@ -62,11 +61,13 @@ struct OnboardingStore {
       case let .setPage(page):
         state.currentPage = page
         return .none
-      case .moveToNextpage:
-        state.currentPage += 1
-        return .none
-      case .startApp:
-        print("App Start")
+      case .appButtonTapped:
+        if state.isLastPage {
+          state.currentPage += 1
+        } else {
+          print("App Start")
+          // TODO: - 앱 시작
+        }
         return .none
       }
     }

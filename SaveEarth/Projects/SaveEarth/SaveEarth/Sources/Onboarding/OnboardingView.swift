@@ -44,17 +44,13 @@ struct OnboardingView: View {
           )
           .padding(.bottom)
 
-          if viewStore.isLastPage {
-            PrimaryButton(title: viewStore.onboardingData[viewStore.currentPage].buttonTitle) {
-              viewStore.send(.startApp)
-            }
-            .padding(.horizontal, 20)
-          } else {
-            DefaultButton(title: viewStore.onboardingData[viewStore.currentPage].buttonTitle) {
-              viewStore.send(.moveToNextpage)
-            }
-            .padding(.horizontal, 20)
+          AppButton(
+            title: viewStore.onboardingData[viewStore.currentPage].buttonTitle,
+            style: viewStore.isLastPage ? .primary : .default
+          ) {
+            viewStore.send(.appButtonTapped)
           }
+          .padding(.horizontal, 20)
         }
       }
     }

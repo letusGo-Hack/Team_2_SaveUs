@@ -9,7 +9,12 @@ import ComposableArchitecture
 import SwiftUI
 
 struct RootView: View {
+
+  // MARK: - Property
+
   @Bindable var store: StoreOf<RootFeature>
+
+  // MARK: - Body
 
   var body: some View {
     NavigationStack(
@@ -41,3 +46,6 @@ struct RootView: View {
     }
   }
 }
+
+// MARK: - View Dependency
+

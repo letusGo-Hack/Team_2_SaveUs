@@ -34,6 +34,12 @@ enum Deeplink {
     }
   }
 
+  /// ViewStackControl 에 따른 동작을 요청
+  ///
+  /// - Note: 각 case absoluteString 예시
+  /// .push: "saveearth://push/setting/notification?exampleMessage=1"
+  /// .popToRoot: "saveearth://popToRoot"
+  /// .pop: "saveearth://pop?count=3"
   static func open(of control: ViewStackControl) {
     switch control {
       case .push(let screens):
@@ -41,16 +47,12 @@ enum Deeplink {
         let keysPath = tuples.map({ $0.0 }).joined(separator: "/")
         let quriesPath = tuples.map({ $0.1 }).joined(separator: "&")
         Self.openSelf(path: "push/" + keysPath + "?" + quriesPath)
-        // ex) "saveearth://push/setting/notification?exampleMessage=1"
 
       case .popToRoot:
         Self.openSelf(path: "popToRoot")
-        // ex) "saveearth://popToRoot"
 
       case .pop(let count):
         Self.openSelf(path: "pop?count=\(count)")
-        // ex) "saveearth://pop?count=3"
     }
   }
-
 }

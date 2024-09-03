@@ -13,15 +13,15 @@ extension Screen {
 
   var key: String {
     switch self {
-      case .setting:  return "setting"
+      case .setting:
+        "setting"
     }
   }
 
   var query: String {
     switch self {
       case .setting(let state):
-        return "exampleMessage=\(state.exampleMessage)"
+        "exampleMessage=\(state.exampleMessage)"
     }
   }
-
 }

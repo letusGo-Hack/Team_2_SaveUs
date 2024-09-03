@@ -32,5 +32,4 @@ extension ViewStackControl {
         return nil
     }
   }
-
 }

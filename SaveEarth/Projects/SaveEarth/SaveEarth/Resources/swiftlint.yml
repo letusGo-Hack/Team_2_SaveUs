@@ -77,3 +77,4 @@ disabled_rules:
 - cyclomatic_complexity # 함수의 복잡도가 적절한지 확인
 - empty_enum_arguments # 열거형 케이스에 인자가 없는지 확인
 - switch_case_alignment
+- nesting

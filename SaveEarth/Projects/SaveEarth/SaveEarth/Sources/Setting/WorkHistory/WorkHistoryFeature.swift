@@ -10,19 +10,19 @@ import ComposableArchitecture
 
 @Reducer
 struct WorkHistoryFeature {
-    
+
     // MARK: - State
-    
+
     @ObservableState
     struct State: Equatable {
         // FIXME: model 바꾸기
         var workLists: [WorkList] = [.dummy, .dummy2]
     }
-    
+
     enum Action {
         case workListCellTapped(UUID)
     }
-    
+
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
@@ -33,7 +33,6 @@ struct WorkHistoryFeature {
         }
     }
 }
-
 
 // dummy
 
@@ -46,7 +45,7 @@ struct WorkList: Equatable {
     static func == (lhs: WorkList, rhs: WorkList) -> Bool {
         lhs.date == rhs.date && lhs.list == rhs.list
     }
-    
+
     let date: String
     var list: [Work]
 }
@@ -61,7 +60,7 @@ extension WorkList {
             .init(title: "음식물 안 남기기")
         ]
     )
-    
+
     static let dummy2: WorkList = .init(
         date: "2024.04.11",
         list: [

@@ -9,13 +9,17 @@ import SwiftUI
 import ComposableArchitecture
 
 struct NotificationSettingView: View {
-    
+
+    // MARK: - Property
+
     @Bindable var store: StoreOf<NotificationSettingFeature>
-    
+
+    // MARK: - Body
+
     var body: some View {
         VStack {
             NavigationBarView(title: "알림 관리하기")
-            
+
             VStack {
                 Toggle(
                     isOn: $store.isActiveNotification.sending(\.toggleNotification)
@@ -23,16 +27,16 @@ struct NotificationSettingView: View {
                     Text("알림 활성화")
                 }
                 .frame(height: 50)
-                
+
                 if store.isActiveNotification {
                     Spacer()
                         .frame(height: 16)
-                    
+
                     HStack {
                         Text("알림 시간 설정")
-                        
+
                         Spacer()
-                        
+
                         NotificationTimeView(store: store)
                     }
                     .frame(height: 50)
@@ -42,14 +46,18 @@ struct NotificationSettingView: View {
 
             Spacer()
         }
-        
+
     }
 }
 
 fileprivate struct NotificationTimeView: View {
-    
+
+    // MARK: - Property
+
     @Bindable var store: StoreOf<NotificationSettingFeature>
-    
+
+    // MARK: - Body
+
     var body: some View {
         Button {
             store.send(.timeViewTapped)
@@ -58,7 +66,7 @@ fileprivate struct NotificationTimeView: View {
                 .frame(width: 90, height: 40)
                 .foregroundStyle(.black)
         }
-        
+
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .overlay {
             RoundedRectangle(cornerRadius: 4)
@@ -72,19 +80,27 @@ fileprivate struct NotificationTimeView: View {
 }
 
 fileprivate struct TimePickerView: View {
+
+    // MARK: - Property
+
     @Bindable var store: StoreOf<NotificationSettingFeature>
-    
+
+    // MARK: - Body
+
     var body: some View {
         NavigationView {
-            DatePicker("", selection: $store.notificationTime.sending(\.setNotificationTime), displayedComponents: .hourAndMinute)
-                .environment(\.locale, Locale(identifier: "ko_KR"))
-                .datePickerStyle(WheelDatePickerStyle())
-                .labelsHidden()
-                .navigationBarItems(
-                    trailing: Button("완료") {
-                        store.send(.timeConfirmButtonTapped)
-                    }
-                )
+            DatePicker("",
+                       selection: $store.notificationTime.sending(\.setNotificationTime),
+                       displayedComponents: .hourAndMinute
+            )
+            .environment(\.locale, Locale(identifier: "ko_KR"))
+            .datePickerStyle(WheelDatePickerStyle())
+            .labelsHidden()
+            .navigationBarItems(
+                trailing: Button("완료") {
+                    store.send(.timeConfirmButtonTapped)
+                }
+            )
         }
     }
 }

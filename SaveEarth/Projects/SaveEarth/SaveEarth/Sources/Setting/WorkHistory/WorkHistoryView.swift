@@ -9,9 +9,9 @@ import SwiftUI
 import ComposableArchitecture
 
 struct WorkHistoryView: View {
-    
+// MARK: - Property
     @Bindable var store: StoreOf<WorkHistoryFeature>
-    
+// MARK: - Body
     var body: some View {
         VStack {
             NavigationBarView(title: "지금까지 한 일")
@@ -27,21 +27,19 @@ struct WorkHistoryView: View {
                             } label: {
                                 HStack {
                                     Text(work.title)
-                                    
+
                                     Spacer()
-                                    
+
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(.gray)
                                 }
                             }
-
-
                         }
                     }
                 }
             }
             .listStyle(.plain)
-            
+
             Spacer()
         }
     }
@@ -54,4 +52,3 @@ struct WorkHistoryView: View {
         }
     )
 }
-

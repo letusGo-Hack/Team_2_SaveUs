@@ -9,24 +9,28 @@ import SwiftUI
 import ComposableArchitecture
 
 struct FeedbackView: View {
-    
+
+    // MARK: - Property
+
     @Bindable var store: StoreOf<FeedbackFeature>
-    
+
+    // MARK: - Body
+
     var body: some View {
-        
+
         VStack {
             NavigationBarView(title: "피드백 주기")
-            
+
             Spacer()
-            
+
             FeedbackInputView(store: store)
-            
+
             Spacer()
-            
+
             EmailInputView(store: store)
-            
+
             Spacer()
-            
+
             SaveUsButtonView(store: store)
                 .padding(.horizontal)
         }
@@ -34,20 +38,24 @@ struct FeedbackView: View {
 }
 
 fileprivate struct FeedbackInputView: View {
-    
+
+    // MARK: - Property
+
     @Bindable var store: StoreOf<FeedbackFeature>
-    
+
     // TODO: PlaceHolder
+
+    // MARK: - Body
 
     var body: some View {
         VStack(alignment: .leading) {
-        
+
             Text("어떤 점이 불편하셨나요?")
                 .font(.system(size: 14))
-            
+
             Spacer()
                 .frame(height: 4)
-            
+
             TextEditor(text: $store.feedback.sending(\.feedbackChanged))
                 .frame(height: 226)
                 .clipShape(.rect(cornerRadius: 4))
@@ -61,14 +69,18 @@ fileprivate struct FeedbackInputView: View {
 }
 
 fileprivate struct EmailInputView: View {
-    
+
+    // MARK: - Property
+
     @Bindable var store: StoreOf<FeedbackFeature>
-    
+
+    // MARK: - Body
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("답변 받으실 메일을 입력해주세요")
                 .font(.system(size: 14))
-            
+
             VStack {
                 TextField("이메일 주소를 입력하세요", text: $store.email.sending(\.emailChanged))
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -79,7 +91,7 @@ fileprivate struct EmailInputView: View {
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(store.isEmailValid ? Color.clear : Color.red, lineWidth: 1)
                     )
-                
+
                 if store.isEmailValid == false {
                     Text("유효한 이메일 주소를 입력해주세요.")
                         .font(.caption)
@@ -92,9 +104,13 @@ fileprivate struct EmailInputView: View {
 }
 
 fileprivate struct SaveUsButtonView: View {
-    
+
+    // MARK: - Property
+
     @Bindable var store: StoreOf<FeedbackFeature>
-    
+
+    // MARK: - Body
+
     var body: some View {
         let isActiveButton = store.isEmailValid && store.feedback.isEmpty == false
         Button {
@@ -109,7 +125,7 @@ fileprivate struct SaveUsButtonView: View {
         }
         .background(isActiveButton ? .black : .white)
         .clipShape(.capsule)
-        
+
     }
 }
 

@@ -5,8 +5,8 @@
 //  Created by 이재훈 on 9/3/24.
 //
 
-import Foundation
 import ComposableArchitecture
+import Foundation
 
 @Reducer
 struct FeedbackFeature {
@@ -35,22 +35,17 @@ struct FeedbackFeature {
             switch action {
             case let .feedbackChanged(feedback):
                 state.feedback = feedback
-
-                print(feedback)
-
+                
                 return .none
 
             case let .emailChanged(email):
                 state.email = email
                 state.isEmailValid = isValidEmail(email)
 
-                print(email)
-
                 return .none
 
             case .confirmButtonTapped:
-
-                print("confirmButtonTapped")
+                // TODO: 확인 버튼 클릭 시 이벤트
 
                 return .none
             }
@@ -61,10 +56,7 @@ struct FeedbackFeature {
 private extension FeedbackFeature {
     func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(
-            format: "SELF MATCHES %@",
-            emailRegEx
-        )
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
 }

@@ -5,8 +5,8 @@
 //  Created by 이재훈 on 9/3/24.
 //
 
-import Foundation
 import ComposableArchitecture
+import Foundation
 
 @Reducer
 struct SettingFeature {
@@ -38,7 +38,6 @@ struct SettingFeature {
             switch action {
             case .onAppear:
                 // TODO: 현재 버전 불러오기
-
                 return .none
 
             case .showTotalTasksButtonTapped:

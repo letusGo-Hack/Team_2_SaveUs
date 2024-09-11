@@ -5,13 +5,17 @@
 //  Created by 이재훈 on 8/14/24.
 //
 
-import SwiftUI
 import ComposableArchitecture
+import SwiftUI
 
 struct WorkHistoryView: View {
-// MARK: - Property
+
+    // MARK: - Property
+
     @Bindable var store: StoreOf<WorkHistoryFeature>
-// MARK: - Body
+
+    // MARK: - Body
+
     var body: some View {
         VStack {
             NavigationBarView(title: "지금까지 한 일")
@@ -27,9 +31,7 @@ struct WorkHistoryView: View {
                             } label: {
                                 HStack {
                                     Text(work.title)
-
                                     Spacer()
-
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(.gray)
                                 }
@@ -39,7 +41,6 @@ struct WorkHistoryView: View {
                 }
             }
             .listStyle(.plain)
-
             Spacer()
         }
     }

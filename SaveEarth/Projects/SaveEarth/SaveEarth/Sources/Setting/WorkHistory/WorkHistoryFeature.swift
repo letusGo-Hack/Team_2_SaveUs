@@ -5,8 +5,8 @@
 //  Created by 이재훈 on 9/3/24.
 //
 
-import Foundation
 import ComposableArchitecture
+import Foundation
 
 @Reducer
 struct WorkHistoryFeature {
@@ -34,7 +34,7 @@ struct WorkHistoryFeature {
     }
 }
 
-// dummy
+// FIXME: dummy > 추후 삭제 예정
 
 struct Work: Identifiable, Equatable {
     let id = UUID()

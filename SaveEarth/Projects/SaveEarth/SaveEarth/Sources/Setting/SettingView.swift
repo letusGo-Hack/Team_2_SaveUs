@@ -5,8 +5,8 @@
 //  Created by 이재훈 on 8/14/24.
 //
 
-import SwiftUI
 import ComposableArchitecture
+import SwiftUI
 
 struct SettingView: View {
 
@@ -19,37 +19,32 @@ struct SettingView: View {
     var body: some View {
         VStack {
             NavigationBarView(title: "Save Earth, Save Us")
-
-            Spacer()
-
-            DetailWorkCountView(store: store)
-
-            Spacer()
-
-            DetailWorkCountChartView(store: store)
-
-            Spacer()
-                .frame(height: 16)
-
-            Button {
-                store.send(.showTotalTasksButtonTapped)
-            } label: {
-                Text("지금까지 한 일 보기")
-                    .font(.system(size: 14, weight: .bold))
-                    .frame(width: 260, height: 42)
+            VStack {
+                Spacer()
+                DetailWorkCountView(store: store)
+                Spacer()
+                VStack(spacing: 16) {
+                    DetailWorkCountChartView(store: store)
+                    Button {
+                        store.send(.showTotalTasksButtonTapped)
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("지금까지 한 일 보기")
+                                .font(.system(size: 14, weight: .bold))
+                                .frame(height: 42)
+                            Spacer()
+                        }
+                    }
+                    .tint(.white)
+                    .background(Color.black)
+                    .clipShape(.rect(cornerRadius: 10))
+                }
             }
-            .tint(.white)
-
-            .background(Color.black)
-            .clipShape(.rect(cornerRadius: 10))
-
+            .padding(.horizontal)
             Spacer()
-                .frame(height: 16)
-
             SettingListView(store: store)
-
             Spacer()
-
             FooterView(store: store)
         }
         .onAppear {
@@ -71,23 +66,20 @@ struct NavigationBarView: View {
     // MARK: - Body
 
     var body: some View {
-        HStack(spacing: 0) {
+        HStack {
             Button {
-
+                // TODO: Action
             } label: {
                 Image(systemName: "chevron.backward")
                     .frame(width: 48, height: 48)
+                    .background(.red)
             }
-
             Spacer()
-
             Text(title)
-
             Spacer()
-
-            Spacer()
+            Rectangle()
+                .fill(.clear)
                 .frame(width: 48)
-
         }
         .frame(height: 54)
     }
@@ -103,28 +95,21 @@ fileprivate struct DetailWorkCountView: View {
 
     var body: some View {
         HStack {
-            VStack {
+            Spacer()
+            VStack(spacing: 8) {
                 Text("지금까지 한 일")
-
-                Spacer()
-                    .frame(height: 8)
-
                 Text(String(store.totalTasks))
                     .font(.system(size: 48, weight: .medium))
             }
-            .frame(width: 145, height: 118)
-
-            VStack {
+            Spacer()
+            VStack(spacing: 8) {
                 Text("하루 평균 한 일")
-
-                Spacer()
-                    .frame(height: 8)
-
                 Text(String(store.avgTasksPerDay))
                     .font(.system(size: 48, weight: .medium))
             }
-            .frame(width: 145, height: 118)
+            Spacer()
         }
+        .frame(height: 118)
     }
 }
 
@@ -160,51 +145,40 @@ fileprivate struct SettingListView: View {
                 HStack {
                     Text("알림 관리하기")
                         .font(.system(size: 14, weight: .regular))
-
                     Spacer()
-
                     Image(systemName: "chevron.right")
                         .foregroundColor(.gray)
                 }
             }
-
             Button(action: {
                 store.send(.reviewButtonTapped)
             }) {
                 HStack {
                     Text("리뷰 하러가기")
                         .font(.system(size: 14, weight: .regular))
-
                     Spacer()
-
                     Image(systemName: "chevron.right")
                         .foregroundColor(.gray)
                 }
             }
-
             Button(action: {
                 store.send(.showGitHubButtonTapped)
             }) {
                 HStack {
                     Text("GitHub 보러가기")
                         .font(.system(size: 14, weight: .regular))
-
                     Spacer()
-
                     Image(systemName: "chevron.right")
                         .foregroundColor(.gray)
                 }
             }
-
             Button(action: {
                 store.send(.feedbackButtonTapped)
             }) {
                 HStack {
                     Text("피드백 주기")
                         .font(.system(size: 14, weight: .regular))
-
                     Spacer()
-
                     Image(systemName: "chevron.right")
                         .foregroundColor(.gray)
                 }
@@ -223,14 +197,8 @@ fileprivate struct FooterView: View {
     // MARK: - Body
 
     var body: some View {
-        VStack {
+        VStack(spacing: 4) {
             Text("© 2024 SaveUs Team. All rights reserved.")
-
-            Spacer()
-                .frame(height: 4)
-
-            // TODO: 현재 버전은
-
             Text("현재 버전: \(store.currentVersion)")
         }
         .font(.system(size: 12, weight: .regular))

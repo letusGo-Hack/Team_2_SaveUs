@@ -5,58 +5,45 @@
 //  Created by 이재훈 on 8/14/24.
 //
 
-import SwiftUI
 import ComposableArchitecture
+import SwiftUI
 
 struct FeedbackView: View {
-
-    // MARK: - Property
+    // MARK: - Preperty
 
     @Bindable var store: StoreOf<FeedbackFeature>
 
     // MARK: - Body
 
     var body: some View {
-
         VStack {
             NavigationBarView(title: "피드백 주기")
-
-            Spacer()
-
-            FeedbackInputView(store: store)
-
-            Spacer()
-
-            EmailInputView(store: store)
-
-            Spacer()
-
-            SaveUsButtonView(store: store)
-                .padding(.horizontal)
+            VStack {
+                Spacer()
+                FeedbackInputView(feedback: $store.feedback.sending(\.feedbackChanged))
+                Spacer()
+                EmailInputView(store: store)
+                Spacer()
+                SaveUsButtonView(store: store)
+            }
+            .padding(.horizontal)
         }
     }
 }
 
 fileprivate struct FeedbackInputView: View {
 
-    // MARK: - Property
+    // MARK: - Preperty
 
-    @Bindable var store: StoreOf<FeedbackFeature>
-
-    // TODO: PlaceHolder
+    @Binding var feedback: String
 
     // MARK: - Body
 
     var body: some View {
-        VStack(alignment: .leading) {
-
+        VStack(alignment: .leading, spacing: 4) {
             Text("어떤 점이 불편하셨나요?")
                 .font(.system(size: 14))
-
-            Spacer()
-                .frame(height: 4)
-
-            TextEditor(text: $store.feedback.sending(\.feedbackChanged))
+            TextEditor(text: $feedback)
                 .frame(height: 226)
                 .clipShape(.rect(cornerRadius: 4))
                 .overlay {
@@ -64,7 +51,6 @@ fileprivate struct FeedbackInputView: View {
                         .stroke(.gray, lineWidth: 1) // FIXME: 색상 변경
                 }
         }
-        .padding(.horizontal)
     }
 }
 
@@ -80,7 +66,6 @@ fileprivate struct EmailInputView: View {
         VStack(alignment: .leading) {
             Text("답변 받으실 메일을 입력해주세요")
                 .font(.system(size: 14))
-
             VStack {
                 TextField("이메일 주소를 입력하세요", text: $store.email.sending(\.emailChanged))
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -91,15 +76,17 @@ fileprivate struct EmailInputView: View {
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(store.isEmailValid ? Color.clear : Color.red, lineWidth: 1)
                     )
-
                 if store.isEmailValid == false {
-                    Text("유효한 이메일 주소를 입력해주세요.")
-                        .font(.caption)
-                        .foregroundColor(.red)
+                    HStack {
+                        Text("유효한 이메일 주소를 입력해주세요.")
+                            .font(.caption)
+                            .foregroundColor(.red)
+                        Spacer()
+                    }
+
                 }
             }
         }
-        .padding(.horizontal)
     }
 }
 
@@ -109,23 +96,26 @@ fileprivate struct SaveUsButtonView: View {
 
     @Bindable var store: StoreOf<FeedbackFeature>
 
-    // MARK: - Body
+    // MARK: - Property
 
     var body: some View {
         let isActiveButton = store.isEmailValid && store.feedback.isEmpty == false
         Button {
             store.send(.confirmButtonTapped)
         } label: {
-            Text(isActiveButton ? "피드백을 남길게요" : "아직 보낼 수 없어요")
-                .foregroundStyle(.white)
-                .font(.system(size: 16, weight: .bold))
-                .frame(maxWidth: .infinity)
-                .frame(height: 48)
-                .disabled(isActiveButton == false)
+            HStack {
+                Spacer()
+                Text(isActiveButton ? "피드백을 남길게요" : "아직 보낼 수 없어요")
+                    .foregroundStyle(.white)
+                    .font(.system(size: 16, weight: .bold))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 48)
+                    .disabled(isActiveButton == false)
+                Spacer()
+            }
         }
-        .background(isActiveButton ? .black : .white)
+        .background(isActiveButton ? .black : .gray)
         .clipShape(.capsule)
-
     }
 }
 

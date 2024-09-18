@@ -11,44 +11,40 @@ struct OnboardingView: View {
 
   // MARK: Property
 
-  var store: StoreOf<OnboardingFeature>
+  @Bindable var store: StoreOf<OnboardingFeature>
 
   // MARK: - Body
 
   var body: some View {
-    WithViewStore(self.store, observe: { $0 }) { viewStore in
+    WithPerceptionTracking {
       ZStack(alignment: .bottom) {
         DesignSystem.AppColor.appPrimary3
           .edgesIgnoringSafeArea(.all)
 
-        TabView(selection: viewStore.binding(
-          get: \.currentPage,
-          send: OnboardingFeature.Action.setPage
-        )) {
-          ForEach(viewStore.onboardingData.indices, id: \.self) { index in
+        TabView(selection: $store.currentPage.sending(\.setPage)) {
+          ForEach(store.onboardingData.indices, id: \.self) { index in
             ZStack(alignment: .bottom) {
-              OnboardingPageView(model: viewStore.onboardingData[index])
+              OnboardingPageView(model: store.onboardingData[index])
                 .tag(index)
-
             }
           }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .indexViewStyle(.page(backgroundDisplayMode: .never))
-        .animation(.easeInOut, value: viewStore.currentPage)
+        .animation(.easeInOut, value: store.currentPage)
 
         VStack {
           PageIndicator(
-            currentPage: viewStore.currentPage,
-            pageCount: viewStore.onboardingData.count
+            currentPage: store.currentPage,
+            pageCount: store.onboardingData.count
           )
           .padding(.bottom)
 
           AppButton(
-            title: viewStore.onboardingData[viewStore.currentPage].buttonTitle,
-            style: viewStore.isLastPage ? .primary : .default
+            title: store.onboardingData[store.currentPage].buttonTitle,
+            style: store.isLastPage ? .primary : .default
           ) {
-            viewStore.send(.appButtonTapped)
+            store.send(.appButtonTapped)
           }
           .padding(.horizontal, 20)
         }

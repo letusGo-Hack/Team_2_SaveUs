@@ -62,7 +62,7 @@ struct OnboardingFeature {
         state.currentPage = page
         return .none
       case .appButtonTapped:
-        if state.isLastPage {
+        if !state.isLastPage {
           state.currentPage += 1
         } else {
           print("App Start")

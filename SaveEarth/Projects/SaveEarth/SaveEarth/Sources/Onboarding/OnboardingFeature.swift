@@ -1,5 +1,5 @@
 //
-//  OnboardingStore.swift
+//  OnboardingFeature.swift
 //  SaveEarth
 //
 
@@ -8,7 +8,7 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct OnboardingStore {
+struct OnboardingFeature {
 
   // MARK: - State
 

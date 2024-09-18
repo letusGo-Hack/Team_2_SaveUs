@@ -11,7 +11,7 @@ struct OnboardingView: View {
 
   // MARK: Property
 
-  var store: StoreOf<OnboardingStore>
+  var store: StoreOf<OnboardingFeature>
 
   // MARK: - Body
 
@@ -23,7 +23,7 @@ struct OnboardingView: View {
 
         TabView(selection: viewStore.binding(
           get: \.currentPage,
-          send: OnboardingStore.Action.setPage
+          send: OnboardingFeature.Action.setPage
         )) {
           ForEach(viewStore.onboardingData.indices, id: \.self) { index in
             ZStack(alignment: .bottom) {
@@ -59,8 +59,8 @@ struct OnboardingView: View {
 
 #Preview {
   OnboardingView(
-    store: Store(initialState: OnboardingStore.State()) {
-      OnboardingStore()
+    store: Store(initialState: OnboardingFeature.State()) {
+      OnboardingFeature()
     }
   )
 }

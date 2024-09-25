@@ -8,6 +8,8 @@
 import SwiftData
 import SwiftUI
 
+// TODO: 화면 분리 필요
+
 struct ContentView: View {
 
   @EnvironmentObject private var weatherManager: WeatherManager

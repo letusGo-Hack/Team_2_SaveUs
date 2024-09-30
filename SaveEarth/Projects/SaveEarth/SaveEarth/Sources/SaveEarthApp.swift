@@ -11,8 +11,6 @@ import SwiftUI
 @main
 struct SaveEarthApp: App {
 
-  let weatherManager: WeatherManager = .init()
-
   var body: some Scene {
     WindowGroup {
       RootView(
@@ -22,7 +20,6 @@ struct SaveEarthApp: App {
           RootFeature()
         }
       )
-      .environmentObject(weatherManager)
       .modelContainer(for: DayInfo.self)
     }
   }

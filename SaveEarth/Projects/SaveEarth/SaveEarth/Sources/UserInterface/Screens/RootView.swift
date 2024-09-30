@@ -9,18 +9,29 @@ import ComposableArchitecture
 import SwiftUI
 
 struct RootView: View {
+
+  // MARK: - Property
+
   @Bindable var store: StoreOf<RootFeature>
+  @Environment(\.modelContext) private var context
+
+  // MARK: - Body
 
   var body: some View {
     NavigationStack(
       path: $store.scope(state: \.path, action: \.path)
     ) {
-      Button(
-        action: {
-          Deeplink.openSelf(path: "push/setting?exampleMessage=1")
-        },
-        label: {
-          Text("설정 화면 이동")
+      MainView(
+        store: withDependencies {
+          $0.weatherManager = .liveValue
+          $0.dayInfoModel = .liveValue
+          $0.dayInfoModel.updateContext(to: context)
+        } operation: {
+          .init(
+            initialState: MainFeature.State()
+          ) {
+            MainFeature()._printChanges()
+          }
         }
       )
     } destination: { store in
@@ -39,5 +50,19 @@ struct RootView: View {
         store.send(.controlViewStack(viewStackControl))
       }
     }
+  }
+}
+
+// MARK: - View Dependency
+
+extension WeatherManager: DependencyKey {
+  static var liveValue: WeatherManager { .init() }
+}
+
+extension DependencyValues {
+
+  var weatherManager: WeatherManager {
+    get { self[WeatherManager.self] }
+    set { self[WeatherManager.self] = newValue }
   }
 }

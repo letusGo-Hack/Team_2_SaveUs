@@ -9,7 +9,12 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SettingView: View {
+
+  // MARK: - Property
+
   let store: StoreOf<SettingFeature>
+
+  // MARK: - Body
 
   var body: some View {
     VStack {

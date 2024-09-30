@@ -6,21 +6,27 @@
 //
 
 import ComposableArchitecture
-import SwiftUI
+import Foundation
 
 @Reducer
 struct SettingFeature {
+
+  // MARK: - State
 
   @ObservableState
   struct State {
     var exampleMessage: Int
   }
 
+  // MARK: - Action
+
   enum Action {
     case setup
     case controlViewStack(ViewStackControl)
     case pushSettingView
   }
+
+  // MARK: - Body
 
   var body: some ReducerOf<Self> {
     Reduce { state, action in

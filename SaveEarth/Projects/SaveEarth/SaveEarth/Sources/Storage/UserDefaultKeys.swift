@@ -9,5 +9,5 @@ import Foundation
 
 enum UserDefaultKeys {
   /// 온보딩 확인 여부
-  static let onboarding: String = "onboarding"
+  static var onboarding: String { "\(#function)" }
 }

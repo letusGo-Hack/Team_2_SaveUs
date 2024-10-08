@@ -13,11 +13,12 @@ import ComposableArchitecture
 @main
 struct SaveEarthApp: App {
 
+  @AppStorage(UserDefaultKeys.onboarding) var isOnboarding: Bool = false
   let weatherManager: WeatherManager = .init()
 
   var body: some Scene {
     WindowGroup {
-      if UserDefaults.standard.bool(forKey: UserDefaultKeys.onboarding) {
+      if isOnboarding {
         ContentView()
           .environmentObject(weatherManager)
           .modelContainer(for: DayInfo.self)

@@ -5,8 +5,8 @@
 //  Created by 김용우 on 8/25/24.
 //
 
-enum Screen {
-  case setting(SettingFeature.State)
+enum Screen: Hashable {
+  case setting(Int)
 }
 
 extension Screen {
@@ -20,8 +20,8 @@ extension Screen {
 
   var query: String {
     switch self {
-      case .setting(let state):
-        "exampleMessage=\(state.exampleMessage)"
+      case .setting(let exampleMesaage):
+        "exampleMessage=\(exampleMesaage)"
     }
   }
 }

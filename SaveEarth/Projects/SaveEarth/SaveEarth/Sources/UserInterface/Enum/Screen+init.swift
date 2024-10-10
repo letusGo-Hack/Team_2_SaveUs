@@ -24,7 +24,7 @@ extension Screen {
         guard let exampleMessage = queryDictionary["exampleMessage"].flatMap({ Int($0) }) else {
           return nil
         }
-        self = .setting(.init(exampleMessage: exampleMessage))
+        self = .setting(exampleMessage)
       default:
         return nil
     }

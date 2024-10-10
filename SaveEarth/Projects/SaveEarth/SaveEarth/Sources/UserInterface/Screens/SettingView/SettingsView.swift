@@ -8,11 +8,11 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct SettingView: View {
+struct SettingsView: View {
 
   // MARK: - Property
-
-  let store: StoreOf<SettingFeature>
+  @Environment(Navigator.self) var navigator
+  let exampleMessage: Int
 
   // MARK: - Body
 
@@ -20,33 +20,42 @@ struct SettingView: View {
     VStack {
       Text("설정 화면")
       Spacer()
-      Text("의존성 주입 값: \(store.state.exampleMessage)")
+      Text("의존성 주입 값: \(exampleMessage)")
       Spacer()
       HStack {
         Spacer()
         Button(
-          action: { store.send(.pushSettingView) },
+          action: {
+            let dependencyNumber = exampleMessage + 1
+            navigator.push(.setting(dependencyNumber))
+          },
           label: {
             Text("설정화면 추가")
           }
         )
         Spacer()
         Button(
-          action: { store.send(.controlViewStack(.pop())) },
+          action: {
+            navigator.pop()
+          },
           label: {
             Text("pop")
           }
         )
         Spacer()
         Button(
-          action: { store.send(.controlViewStack(.pop(2))) },
+          action: {
+            navigator.pop(2)
+          },
           label: {
             Text("pop count 2")
           }
         )
         Spacer()
         Button(
-          action: { store.send(.controlViewStack(.popToRoot)) },
+          action: {
+            navigator.popToRoot()
+          },
           label: {
             Text("popToRoot")
           }

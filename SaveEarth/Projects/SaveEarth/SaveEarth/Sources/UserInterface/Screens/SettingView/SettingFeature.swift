@@ -1,5 +1,5 @@
 //
-//  SettingFeature.swift
+//  SettingsFeature.swift
 //  SaveEarth
 //
 //  Created by 김용우 on 8/25/24.
@@ -9,7 +9,7 @@ import ComposableArchitecture
 import Foundation
 
 @Reducer
-struct SettingFeature {
+struct SettingsFeature {
 
   // MARK: - State
 
@@ -40,7 +40,7 @@ struct SettingFeature {
 
         case .pushSettingView:
           let dependencyNumber = state.exampleMessage + 1
-          let settingView: Screen = .setting(.init(exampleMessage: dependencyNumber))
+          let settingView: Screen = .setting(.init(dependencyNumber))
           return .send(.controlViewStack(.push([settingView])))
       }
     }

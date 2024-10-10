@@ -13,14 +13,8 @@ struct SaveEarthApp: App {
 
   var body: some Scene {
     WindowGroup {
-      RootView(
-        store: .init(
-          initialState: RootFeature.State()
-        ) {
-          RootFeature()
-        }
-      )
-      .modelContainer(for: DayInfo.self)
+      RootView()
+        .modelContainer(for: DayInfo.self)
     }
   }
 }

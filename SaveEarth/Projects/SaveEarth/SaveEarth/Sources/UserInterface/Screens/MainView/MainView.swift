@@ -48,7 +48,13 @@ struct MainView: View {
             }
           }
           .ignoresSafeArea()
+          .allowsHitTesting(false)
       }
+      VStack {
+        Spacer()
+        Color.white.frame(height: 100)
+      }
+      .ignoresSafeArea(edges: .bottom)
       if let dayInfo = dayInfo {
         MainInterface(
           dayInfo: dayInfo,
@@ -137,4 +143,6 @@ fileprivate extension Mission {
 
 #Preview {
   MainView()
+    .environment(Navigator())
+    .environment(WeatherManager())
 }

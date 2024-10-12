@@ -39,18 +39,6 @@ struct RootView: View {
       }
     }
     .environment(weatherManager)
-  }
-}
-
-// TODO: 삭제 예정
-extension WeatherManager: DependencyKey {
-  static var liveValue: WeatherManager { .init() }
-}
-
-extension DependencyValues {
-
-  var weatherManager: WeatherManager {
-    get { self[WeatherManager.self] }
-    set { self[WeatherManager.self] = newValue }
+    .environment(navigator)
   }
 }

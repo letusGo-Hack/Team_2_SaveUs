@@ -32,3 +32,18 @@ extension DayInfo {
     Calendar.current.isDateInToday(date)
   }
 }
+
+#if DEBUG
+extension DayInfo {
+  static var preview: DayInfo {
+    .init(
+      date: .now,
+      temperatureData: .init(
+        historicTemperature: .zero,
+        currentTemperature: 6),
+      missionList: []
+    )
+  }
+}
+
+#endif

@@ -13,31 +13,20 @@ struct RootView: View {
   // MARK: - Property
 
   @State var navigator: Navigator = .init()
+  @State var weatherManager: WeatherManager = .init()
   @Environment(\.modelContext) private var context
 
   // MARK: - Body
 
   var body: some View {
     NavigationStack(path: $navigator.path) {
-      MainView(
-        store: withDependencies {
-          $0.weatherManager = .liveValue
-          $0.dayInfoModel = .liveValue
-          $0.dayInfoModel.updateContext(to: context)
-        } operation: {
-          .init(
-            initialState: MainFeature.State()
-          ) {
-            MainFeature()._printChanges()
+      MainView()
+        .navigationDestination(for: Screen.self) { screen in
+          switch screen {
+            case .setting(let exampleMessage):
+              SettingsView(exampleMessage: exampleMessage)
           }
         }
-      )
-      .navigationDestination(for: Screen.self) { screen in
-        switch screen {
-          case .setting(let exampleMessage):
-            SettingsView(exampleMessage: exampleMessage)
-        }
-      }
     }
     .onOpenURL { deeplink in
       print(deeplink) // FIXME: 확인 LOG
@@ -49,6 +38,7 @@ struct RootView: View {
         navigator.control(by: viewStackControl)
       }
     }
+    .environment(weatherManager)
   }
 }
 

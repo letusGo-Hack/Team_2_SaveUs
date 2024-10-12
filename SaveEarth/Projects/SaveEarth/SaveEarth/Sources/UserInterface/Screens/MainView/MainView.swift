@@ -9,101 +9,132 @@ import ComposableArchitecture
 import SwiftData
 import SwiftUI
 
-// TODO: 화면 분리 필요
-
 struct MainView: View {
-
-  // MARK: - Property
-
-  @Bindable var store: StoreOf<MainFeature>
+  @Environment(WeatherManager.self) var weatherManager
+  @Environment(\.modelContext) var modelContext
   @Query(sort: \DayInfo.date) private var dayInfos: [DayInfo]
 
-  // MARK: - Body
+  @State var latitude: CGFloat = 76.571640
+  @State var longitude: CGFloat = -41.666646
 
-  var content: some View { // UI 그리기
+  var dayInfo: DayInfo? { dayInfos.first(where: { $0.isToday }) }
+  var isCleared: Bool? { dayInfo?.missionList.allSatisfy(\.isClear) }
+  var completeRate: Float {
+    if let missionList = dayInfo?.missionList {
+      let clearedCount = missionList.filter(\.isClear).count
+      return Float(clearedCount) / Float(missionList.count)
+    } else {
+      return .zero
+    }
+  }
+
+  var body: some View {
     ZStack {
       MapView(
-        latitude: store.state.latitude,
-        longitude: store.state.longitude
+        latitude: $latitude,
+        longitude: $longitude
       )
       .overlay {
-        TemperatureGradient(complete: store.state.completeRate)
+        TemperatureGradient(complete: completeRate)
+          .overlay(alignment: .center) {
+            if let isCleared = isCleared {
+              if isCleared {
+                CompleteQuestView()
+              } else {
+                Image(systemName: "flame.fill")
+                  .foregroundColor(.red)
+                  .font(.largeTitle)
+              }
+            }
+          }
           .ignoresSafeArea()
       }
-      .overlay {
-        if let missions = store.dayInfo?.missionList, missions.allSatisfy(\.isClear) {
-          CompleteQuestView()
-        } else {
-          Image(systemName: "flame.fill")
-            .foregroundColor(.red)
-            .font(.largeTitle)
-        }
-      }
-      if let dayInfo = store.dayInfo {
-        VStack {
-          Text(store.state.completeRate != 1 ? "뜨거운 지구를 구해주세요!! 😱" : "오늘도 지구를 조금 살려냈어요!")
-            .font(.title)
-            .padding(.vertical)
-          Text("Temperature 🌡️")
-            .font(.title2)
-            .padding()
-          HStack {
-            Spacer()
-            VStack(alignment: .leading) {
-              Text("현재온도")
-              Text(String(format: "%.2f℃", dayInfo.temperatureData.currentTemperature))
-            }
-            Spacer()
-            VStack(alignment: .leading) {
-              Text("평균온도")
-              Text(String(format: "%.2f℃", dayInfo.temperatureData.historicTemperature))
-            }
-            Spacer()
-          }
-          .font(.title2)
-          Spacer()
-          if !dayInfo.missionList.allSatisfy(\.isClear) {
-            QuestFloatingButton(
-              numberOfQuests: UInt(dayInfo.missionList.filter { !$0.isClear }.count)
-            ) {
-              store.send(.questFloatingButtonTapped)
-            }
-            .transition(AppearingTransition())
-            .animation(.spring(), value: store.state.destination)
-          }
-        }
+      if let dayInfo = dayInfo {
+        MainInterface(
+          dayInfo: dayInfo,
+          completeRate: completeRate
+        )
       } else {
         ProgressView()
       }
     }
-    .sheet(
-      item: $store.scope(
-        state: \.destination?.modal,
-        action: \.destination.modal
-      )
-    ) { store in
-      MissionListModal(store: store)
-        .presentationDetents([.height(260)])
+    .task {
+      do {
+        try await updateCurrentLocationTemperature()
+      } catch {
+
+      }
     }
+    .toolbarVisibility(.hidden, for: .navigationBar)
+  }
+}
+
+extension MainView {
+
+  private func updateCurrentLocationTemperature() async throws {
+    // FIXME: WeatherKit 인증 이슈 해결 필요
+//    guard let response = try await weatherManager.fetchHistoricalTemperature(
+//      location: .init(latitude: latitude, longitude: longitude)
+//    ) else {
+//      return print("Failed to fetch historical temperature")
+//    }
+//
+    let currentTemperature = 6.0// response.currentTemperature
+    let historicTemperature = 0.0//response.historicTemperature
+
+    let count = abs(Int(historicTemperature - currentTemperature))
+
+//    // TODO: 온도 차이 Display
+
+    guard dayInfo == nil else {
+      return print("Local weather already exists.")
+    }
+    
+    add(
+      DayInfo(
+        date: Date.now,
+        temperatureData: .init(
+          historicTemperature: historicTemperature,
+          currentTemperature: currentTemperature
+        ),
+        missionList: Mission.makeMissionList(count: count > 5 ? 5 : count)
+      )
+    )
   }
 
-  var body: some View { // View 전처리 또는 의존성 주입 등 ex) onAppear, onDisAppear
-    content
-      .task {
-        store.send(.fetch)
-      }
-      .onChange(of: dayInfos, initial: true) { _, _ in
-        store.send(.onChange(dayInfos))
-      }
+  private func add(_ dayInfo: DayInfo) {
+    modelContext.insert(dayInfo)
+  }
+
+}
+
+fileprivate extension Mission {
+
+  static func makeMissionList(
+    count: Int
+  ) -> [Mission] {
+    let questList: [String] = [
+      "페트병 분리수거 하기 🫡",
+      "에어컨 1도 낮추기 😎",
+      "오늘 하루 텀블러 사용하기 😙",
+      "종이컵 사용하지 않기",
+      "대중교통 이용하기",
+      "낮에는 전등 끄기",
+      "사용하지 않는 콘센트 선 뽑아 놓기"
+    ]
+    var indexes = Set<Int>()
+
+    while indexes.count < count {
+      let randomIndex = Int.random(in: 0..<questList.count)
+      indexes.update(with: randomIndex)
+    }
+
+    return indexes.map({ Mission(title: questList[$0]) })
   }
 }
 
 // MARK: - Preview
 
 #Preview {
-  MainView(
-    store: .init(initialState: MainFeature.State()) {
-      MainFeature()
-    }
-  )
+  MainView()
 }

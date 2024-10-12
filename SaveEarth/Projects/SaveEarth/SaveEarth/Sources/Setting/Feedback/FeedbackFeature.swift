@@ -35,7 +35,7 @@ struct FeedbackFeature {
             switch action {
             case let .feedbackChanged(feedback):
                 state.feedback = feedback
-                
+
                 return .none
 
             case let .emailChanged(email):

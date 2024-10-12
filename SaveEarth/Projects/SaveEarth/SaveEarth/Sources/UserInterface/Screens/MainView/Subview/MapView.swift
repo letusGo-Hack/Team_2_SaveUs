@@ -10,8 +10,9 @@ import MapKit
 import SwiftUI
 
 struct MapView: View {
-  let latitude: CGFloat
-  let longitude: CGFloat
+
+  @Binding var latitude: CGFloat
+  @Binding var longitude: CGFloat
 
   var body: some View {
     Map(
@@ -36,5 +37,24 @@ struct MapView: View {
         longitudeDelta: distanceInMeters
       )
     )
+  }
+}
+
+enum Location {
+  case north
+  case south
+
+  var latitude: CGFloat {
+    switch self {
+      case .north:  return 76.571640
+      case .south:  return 76.571640
+    }
+  }
+
+  var logitude: CGFloat {
+    switch self {
+      case .north:  return -41.666646
+      case .south:  return -41.666646
+    }
   }
 }

@@ -12,7 +12,6 @@ struct BottomInterface: View {
 
   @Environment(Navigator.self) var navigator
 
-  @State var isPresentedModal: Bool = false
   var leftCount: Int { missionList.filter({ !$0.isClear }).count }
   var firstTodo: Mission? { missionList.filter({ !$0.isClear }).first }
 
@@ -32,7 +31,9 @@ struct BottomInterface: View {
         }
         Spacer()
         Button(
-          action: {},
+          action: {
+            navigator.push(.missionList)
+          },
           label: {
             Text("더보기")
               .font(.notoSansKR(size: 14, weight: .bold))
@@ -43,13 +44,7 @@ struct BottomInterface: View {
       .padding(.horizontal, 17)
       .padding(.top, 24)
       Button(
-        action: {
-          if let _ = firstTodo {
-            
-          } else {
-            // TODO: 화면이동
-          }
-        },
+        action: doneMission,
         label: {
           HStack {
             Text(firstTodo?.title ?? "오늘 완료한 작은 할 일들을 보러갈게요")
@@ -81,26 +76,21 @@ struct BottomInterface: View {
       RoundedRectangle(cornerRadius: 8, style: .continuous)
         .fill(.white)
     )
-    .sheet(isPresented: $isPresentedModal) {
-      MissionListModal(missionList: $missionList)
-        .presentationDetents([.height(260)])
-    }
-    .onChange(of: missionList, initial: false) { oldValue, newValue in
-      if newValue.allSatisfy(\.isClear) {
-        isPresentedModal = false
-      }
+  }
+}
+
+extension BottomInterface {
+
+  private func doneMission() {
+    if let mission = firstTodo, let index = missionList.firstIndex(of: mission) {
+      missionList[index].isClear.toggle()
+    } else {
+      navigator.push(.missionList)
     }
   }
 }
 
-#if DEBUG
-extension Mission {
-  static var preview: [Mission] = [
-    .init(title: "테스트 1", isClear: true),
-    .init(title: "테스트 2", isClear: false)
-  ]
-}
-
+#if DEBUE
 #Preview {
   BottomInterface(missionList: .constant(Mission.preview))
     .environment(Navigator())

@@ -24,11 +24,7 @@ struct SaveEarthApp: App {
           .modelContainer(for: DayInfo.self)
       } else {
         // 온보딩 화면을 보지 않은 경우 분기 처리
-        OnboardingView(
-          store: Store(initialState: OnboardingFeature.State()) {
-            OnboardingFeature()
-          }
-        )
+        OnboardingView()
       }
     }
   }

@@ -13,7 +13,7 @@ import ComposableArchitecture
 @main
 struct SaveEarthApp: App {
 
-  @AppStorage(UserDefaultKeys.onboarding) var isOnboarding: Bool = false
+  @AppStorage(AppStorageKeys.onboarding) var isOnboarding: Bool = false
   let weatherManager: WeatherManager = .init()
 
   var body: some Scene {

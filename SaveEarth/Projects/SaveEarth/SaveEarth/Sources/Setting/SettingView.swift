@@ -50,10 +50,13 @@ struct SettingView: View {
         .onAppear {
             store.send(.onAppear)
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct NavigationBarView: View {
+  @Environment(\.dismiss) var dismiss
 
     // MARK: - Property
 
@@ -68,7 +71,7 @@ struct NavigationBarView: View {
     var body: some View {
         HStack {
             Button {
-                // TODO: Action
+              dismiss()
             } label: {
                 Image(systemName: "chevron.backward")
                     .frame(width: 48, height: 48)

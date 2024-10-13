@@ -23,8 +23,14 @@ struct RootView: View {
       MainView()
         .navigationDestination(for: Screen.self) { screen in
           switch screen {
-            case .setting(let exampleMessage):
-              SettingsView(exampleMessage: exampleMessage)
+            case .missionList:                  MissionListView()
+            case .setting:
+              SettingView(
+                store: .init(
+                  initialState: SettingFeature.State()) {
+                    SettingFeature()
+                  }
+              )
           }
         }
     }
@@ -39,18 +45,6 @@ struct RootView: View {
       }
     }
     .environment(weatherManager)
-  }
-}
-
-// TODO: 삭제 예정
-extension WeatherManager: DependencyKey {
-  static var liveValue: WeatherManager { .init() }
-}
-
-extension DependencyValues {
-
-  var weatherManager: WeatherManager {
-    get { self[WeatherManager.self] }
-    set { self[WeatherManager.self] = newValue }
+    .environment(navigator)
   }
 }

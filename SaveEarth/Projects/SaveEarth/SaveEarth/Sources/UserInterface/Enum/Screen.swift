@@ -5,23 +5,26 @@
 //  Created by 김용우 on 8/25/24.
 //
 
+import SwiftUI
+
 enum Screen: Hashable {
-  case setting(Int)
+  case missionList
+  case setting
 }
 
 extension Screen {
 
   var key: String {
     switch self {
-      case .setting:
-        "setting"
+      case .missionList:    "missionList"
+      case .setting:        "setting"
     }
   }
 
   var query: String {
     switch self {
-      case .setting(let exampleMesaage):
-        "exampleMessage=\(exampleMesaage)"
+      case .missionList:    "missionList"
+      case .setting:        "setting"
     }
   }
 }

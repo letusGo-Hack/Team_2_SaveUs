@@ -23,11 +23,8 @@ struct RootView: View {
       MainView()
         .navigationDestination(for: Screen.self) { screen in
           switch screen {
-            case .missionList:
-              MissionListView()
-              
-            case .setting(let exampleMessage):
-              SettingsView(exampleMessage: exampleMessage)
+            case .missionList:                  MissionListView()
+            case .setting(let exampleMessage):  SettingsView(exampleMessage: exampleMessage)
           }
         }
     }

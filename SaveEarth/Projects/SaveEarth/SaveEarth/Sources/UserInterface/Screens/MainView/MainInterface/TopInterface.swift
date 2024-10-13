@@ -104,6 +104,9 @@ struct TopInterface: View {
       }
     }
     .padding(.horizontal, 12)
+    .onDisappear {
+      locationToggle = false
+    }
   }
 }
 

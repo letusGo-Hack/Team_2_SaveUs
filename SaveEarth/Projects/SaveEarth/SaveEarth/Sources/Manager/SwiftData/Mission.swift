@@ -25,3 +25,12 @@ final class Mission {
     self.isClear = isClear
   }
 }
+
+#if DEBUG
+extension Mission {
+  static var preview: [Mission] = [
+    .init(title: "테스트 1", isClear: true),
+    .init(title: "테스트 2", isClear: false)
+  ]
+}
+#endif

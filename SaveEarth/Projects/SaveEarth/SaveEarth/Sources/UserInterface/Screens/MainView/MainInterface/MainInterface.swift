@@ -13,7 +13,6 @@ struct MainInterface: View {
   let completeRate: Float
 
   @State var missionList: [Mission]
-  @State var locationToggle: Bool = false
 
   @Query(sort: \DayInfo.date) private var dayInfos: [DayInfo]
   var temperatureDifference: Int {

@@ -20,11 +20,9 @@ extension Screen {
       return nil
     }
     switch key {
-      case "setting":
-        guard let exampleMessage = queryDictionary["exampleMessage"].flatMap({ Int($0) }) else {
-          return nil
-        }
-        self = .setting(exampleMessage)
+      case "missionList":
+        self = .missionList
+
       default:
         return nil
     }

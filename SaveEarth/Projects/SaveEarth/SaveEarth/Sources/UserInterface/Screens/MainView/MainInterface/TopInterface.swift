@@ -10,6 +10,8 @@ import SwiftUI
 struct TopInterface: View {
   let temperatureDifference: Int
 
+  @Environment(Navigator.self) var navigator
+
   @State var locationToggle: Bool = false
 
   enum LocationBundle: CaseIterable {
@@ -37,7 +39,7 @@ struct TopInterface: View {
     HStack(alignment: .top, spacing: 12) {
       HStack(alignment: .center, spacing: .zero) {
         Button(
-          action: {},
+          action: { navigator.push(.setting) },
           label: {
             Image("Group 15")
               .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))

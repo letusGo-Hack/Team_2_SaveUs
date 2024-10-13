@@ -65,6 +65,7 @@ struct OnboardingFeature {
         if !state.isLastPage {
           state.currentPage += 1
         } else {
+          UserDefaults.standard.setValue(true, forKey: UserDefaultKeys.onboarding)
           print("App Start")
           // TODO: - 앱 시작
         }

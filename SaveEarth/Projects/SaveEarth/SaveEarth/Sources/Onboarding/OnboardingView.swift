@@ -9,54 +9,62 @@ import ComposableArchitecture
 
 struct OnboardingView: View {
 
+  // MARK: - Constant
+
+  private enum Constant {
+    static let horizontalPadding: CGFloat = 20
+  }
+
   // MARK: Property
 
-  @Bindable var store: StoreOf<OnboardingFeature>
+  @AppStorage(AppStorageKeys.onboarding) var isOnboarding: Bool = false
+  @State private var currentPage: Int = 0
+  var isLastPage: Bool {
+    currentPage == OnboardingConstant.onboardingData.count - 1
+  }
 
   // MARK: - Body
 
   var body: some View {
-    WithPerceptionTracking {
-      ZStack(alignment: .bottom) {
-        DesignSystem.AppColor.appPrimary3
-          .edgesIgnoringSafeArea(.all)
+    ZStack(alignment: .bottom) {
+      DesignSystem.AppColor.appPrimary3
+        .edgesIgnoringSafeArea(.all)
 
-        TabView(selection: $store.currentPage.sending(\.setPage)) {
-          ForEach(store.onboardingData.indices, id: \.self) { index in
-            ZStack(alignment: .bottom) {
-              OnboardingPageView(model: store.onboardingData[index])
-                .tag(index)
-            }
+      TabView(selection: $currentPage) {
+        ForEach(OnboardingConstant.onboardingData.indices, id: \.self) { index in
+          ZStack(alignment: .bottom) {
+            OnboardingPageView(model: OnboardingConstant.onboardingData[index])
+              .tag(index)
           }
         }
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-        .indexViewStyle(.page(backgroundDisplayMode: .never))
-        .animation(.easeInOut, value: store.currentPage)
+      }
+      .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+      .indexViewStyle(.page(backgroundDisplayMode: .never))
+      .animation(.easeInOut, value: currentPage)
 
-        VStack {
-          PageIndicator(
-            currentPage: store.currentPage,
-            pageCount: store.onboardingData.count
-          )
-          .padding(.bottom)
+      VStack {
+        PageIndicator(
+          currentPage: currentPage,
+          pageCount: OnboardingConstant.onboardingData.count
+        )
+        .padding(.bottom)
 
-          AppButton(
-            title: store.onboardingData[store.currentPage].buttonTitle,
-            style: store.isLastPage ? .primary : .default
-          ) {
-            store.send(.appButtonTapped)
+        AppButton(
+          title: OnboardingConstant.onboardingData[currentPage].buttonTitle,
+          style: isLastPage ? .primary : .default
+        ) {
+          if !isLastPage {
+            currentPage += 1
+          } else {
+            isOnboarding = true
           }
-          .padding(.horizontal, 20)
         }
+        .padding(.horizontal, Constant.horizontalPadding)
       }
     }
   }
 }
 
 #Preview {
-  OnboardingView(
-    store: Store(initialState: OnboardingFeature.State()) {
-      OnboardingFeature()
-    }
-  )
+  OnboardingView()
 }

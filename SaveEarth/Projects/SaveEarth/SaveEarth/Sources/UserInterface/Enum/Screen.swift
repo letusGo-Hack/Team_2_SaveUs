@@ -6,7 +6,7 @@
 //
 
 enum Screen: Hashable {
-  case setting(Int)
+  case setting
 }
 
 extension Screen {
@@ -18,10 +18,9 @@ extension Screen {
     }
   }
 
-  var query: String {
+  var query: String? {
     switch self {
-      case .setting(let exampleMesaage):
-        "exampleMessage=\(exampleMesaage)"
+      default: return nil
     }
   }
 }

@@ -23,8 +23,12 @@ struct RootView: View {
       MainView()
         .navigationDestination(for: Screen.self) { screen in
           switch screen {
-            case .setting(let exampleMessage):
-              SettingsView(exampleMessage: exampleMessage)
+            case .setting:
+              SettingView(
+                store: .init(initialState: SettingFeature.State()) {
+                  SettingFeature()
+                }
+              )
           }
         }
     }

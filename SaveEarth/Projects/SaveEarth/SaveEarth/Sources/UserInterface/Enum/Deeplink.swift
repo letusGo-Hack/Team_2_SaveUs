@@ -45,8 +45,8 @@ enum Deeplink {
       case .push(let screens):
         let tuples = screens.map({ ($0.key, $0.query) })
         let keysPath = tuples.map({ $0.0 }).joined(separator: "/")
-        let quriesPath = tuples.map({ $0.1 }).joined(separator: "&")
-        Self.openSelf(path: "push/" + keysPath + "?" + quriesPath)
+        let quriesPath = tuples.compactMap({ $0.1 }).joined(separator: "&")
+        Self.openSelf(path: "push/" + keysPath + (quriesPath.isEmpty ? "" : "?" + quriesPath))
 
       case .popToRoot:
         Self.openSelf(path: "popToRoot")

@@ -23,6 +23,9 @@ extension Screen {
       case "missionList":
         self = .missionList
 
+      case "setting":
+        self = .setting
+
       default:
         return nil
     }

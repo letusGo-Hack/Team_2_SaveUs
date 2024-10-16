@@ -21,7 +21,7 @@ extension Screen {
     }
   }
 
-  var query: String {
+  var query: String? {
     switch self {
       case .missionList:    "missionList"
       case .setting:        "setting"

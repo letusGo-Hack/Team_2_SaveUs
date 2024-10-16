@@ -65,11 +65,7 @@ struct MainView: View {
       }
     }
     .task {
-      do {
-        try await updateCurrentLocationTemperature()
-      } catch {
-
-      }
+      try? await updateCurrentLocationTemperature()
     }
     .toolbarVisibility(.hidden, for: .navigationBar)
   }

@@ -42,8 +42,6 @@ internal enum Gen {
   }
   internal enum Images {
     internal static let launchScreenMap = ImageAsset(name: "launchScreenMap")
-    internal static let group15 = ImageAsset(name: "Group 15")
-    internal static let group21 = ImageAsset(name: "Group 21")
     internal static let logo = ImageAsset(name: "logo")
   }
 }

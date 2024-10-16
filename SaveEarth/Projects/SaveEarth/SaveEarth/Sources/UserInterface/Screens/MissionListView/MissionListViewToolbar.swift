@@ -15,7 +15,7 @@ struct MissionListViewToolbar: ToolbarContent {
       Button(
         action: { dismiss() },
         label: {
-          Image("Group 43")
+          Image(asset: Gen.Images.group43)
         }
       )
     }

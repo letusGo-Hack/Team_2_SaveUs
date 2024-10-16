@@ -41,7 +41,7 @@ struct TopInterface: View {
         Button(
           action: { navigator.push(.setting) },
           label: {
-            Image("Group 15")
+            Image(asset: Gen.Images.group15)
               .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
           }
         )
@@ -50,7 +50,7 @@ struct TopInterface: View {
         Text(String(format: "%d℃", temperatureDifference))
           .foregroundStyle(.red)
           .padding(.leading, 8)
-        Image("Group 16")
+        Image(asset: Gen.Images.group16)
           .foregroundStyle(.red)
         Spacer()
       }
@@ -64,7 +64,7 @@ struct TopInterface: View {
           action: { withAnimation { locationToggle.toggle() } },
           label: {
             VStack(spacing: 2) {
-              Image("Group 21")
+              Image(asset: Gen.Images.group21)
               Text("위치 수정")
                 .font(.sfPro(size: 9))
                 .foregroundStyle(.white)

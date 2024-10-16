@@ -57,7 +57,7 @@ struct BottomInterface: View {
               if let _ = firstTodo {
                 Image(systemName: "app")
               } else {
-                Image("Group 29")
+                Image(asset: Gen.Images.group29)
               }
             }
             .padding(.trailing, 16)

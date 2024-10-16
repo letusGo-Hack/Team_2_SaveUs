@@ -5,13 +5,12 @@
 //  Created by 이재훈 on 8/14/24.
 //
 
-import ComposableArchitecture
 import SwiftUI
 
 struct FeedbackView: View {
     // MARK: - Preperty
-
-    @Bindable var store: StoreOf<FeedbackFeature>
+    @State private var feedback: String = ""
+    @State private var email: String = ""
 
     // MARK: - Body
 
@@ -20,11 +19,11 @@ struct FeedbackView: View {
             NavigationBarView(title: "피드백 주기")
             VStack {
                 Spacer()
-                FeedbackInputView(feedback: $store.feedback.sending(\.feedbackChanged))
+                FeedbackInputView(feedback: $feedback)
                 Spacer()
-                EmailInputView(store: store)
+                EmailInputView(email: $email)
                 Spacer()
-                SaveUsButtonView(store: store)
+                SaveUsButtonView(email: $email, feedback: $feedback)
             }
             .padding(.horizontal)
         }
@@ -55,35 +54,35 @@ fileprivate struct FeedbackInputView: View {
 }
 
 fileprivate struct EmailInputView: View {
-
     // MARK: - Property
 
-    @Bindable var store: StoreOf<FeedbackFeature>
-
+    @Binding var email: String
+    
     // MARK: - Body
-
+    
     var body: some View {
+        let isValidEmail = email.isValidEmailFormat()
         VStack(alignment: .leading) {
             Text("답변 받으실 메일을 입력해주세요")
                 .font(.system(size: 14))
             VStack {
-                TextField("이메일 주소를 입력하세요", text: $store.email.sending(\.emailChanged))
+                TextField("이메일 주소를 입력하세요", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .disableAutocorrection(true)
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
-                            .stroke(store.isEmailValid ? Color.clear : Color.red, lineWidth: 1)
+                            .stroke(isValidEmail ? Color.clear : Color.red, lineWidth: 1)
                     )
-                if store.isEmailValid == false {
+                if isValidEmail == false {
                     HStack {
                         Text("유효한 이메일 주소를 입력해주세요.")
                             .font(.caption)
                             .foregroundColor(.red)
                         Spacer()
                     }
-
+                    
                 }
             }
         }
@@ -94,14 +93,15 @@ fileprivate struct SaveUsButtonView: View {
 
     // MARK: - Property
 
-    @Bindable var store: StoreOf<FeedbackFeature>
+    @Binding var email: String
+    @Binding var feedback: String
 
     // MARK: - Property
 
     var body: some View {
-        let isActiveButton = store.isEmailValid && store.feedback.isEmpty == false
+        let isActiveButton = email.isValidEmailFormat() && feedback.isEmpty == false
         Button {
-            store.send(.confirmButtonTapped)
+            // TODO: 데이터 보내기
         } label: {
             HStack {
                 Spacer()
@@ -119,10 +119,12 @@ fileprivate struct SaveUsButtonView: View {
     }
 }
 
+fileprivate extension String {
+    func isValidEmailFormat() -> Bool {
+        self.hasSuffix(".com") && self.contains("@")
+    }
+}
+
 #Preview {
-    FeedbackView(
-        store: Store(initialState: FeedbackFeature.State()) {
-            FeedbackFeature()
-        }
-    )
+    FeedbackView()
 }

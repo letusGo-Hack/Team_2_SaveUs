@@ -5,14 +5,11 @@
 //  Created by 이재훈 on 8/14/24.
 //
 
-import ComposableArchitecture
 import SwiftUI
 
 struct SettingView: View {
 
     // MARK: - Property
-
-    @Bindable var store: StoreOf<SettingFeature>
 
     // MARK: - Body
 
@@ -21,12 +18,12 @@ struct SettingView: View {
             NavigationBarView(title: "Save Earth, Save Us")
             VStack {
                 Spacer()
-                DetailWorkCountView(store: store)
+                DetailWorkCountView()
                 Spacer()
                 VStack(spacing: 16) {
-                    DetailWorkCountChartView(store: store)
+                    DetailWorkCountChartView()
                     Button {
-                        store.send(.showTotalTasksButtonTapped)
+                        // TODO: TotalView 노출
                     } label: {
                         HStack {
                             Spacer()
@@ -43,12 +40,12 @@ struct SettingView: View {
             }
             .padding(.horizontal)
             Spacer()
-            SettingListView(store: store)
+            SettingListView()
             Spacer()
-            FooterView(store: store)
+            FooterView()
         }
         .onAppear {
-            store.send(.onAppear)
+            
         }
     }
 }
@@ -68,7 +65,6 @@ struct NavigationBarView: View {
     var body: some View {
         HStack {
             Button {
-                // TODO: Action
             } label: {
                 Image(systemName: "chevron.backward")
                     .frame(width: 48, height: 48)
@@ -88,8 +84,8 @@ struct NavigationBarView: View {
 fileprivate struct DetailWorkCountView: View {
 
     // MARK: - Property
-
-    @Bindable var store: StoreOf<SettingFeature>
+    @State var totalTasks: Int = 10
+    @State var avgTasksPerDay: Int = 10
 
     // MARK: - Body
 
@@ -98,13 +94,13 @@ fileprivate struct DetailWorkCountView: View {
             Spacer()
             VStack(spacing: 8) {
                 Text("지금까지 한 일")
-                Text(String(store.totalTasks))
+                Text("\(totalTasks)")
                     .font(.system(size: 48, weight: .medium))
             }
             Spacer()
             VStack(spacing: 8) {
                 Text("하루 평균 한 일")
-                Text(String(store.avgTasksPerDay))
+                Text("\(avgTasksPerDay)")
                     .font(.system(size: 48, weight: .medium))
             }
             Spacer()
@@ -117,7 +113,7 @@ fileprivate struct DetailWorkCountChartView: View {
 
     // MARK: - Property
 
-    @Bindable var store: StoreOf<SettingFeature>
+
 
     // MARK: - Body
 
@@ -133,14 +129,13 @@ fileprivate struct SettingListView: View {
 
     // MARK: - Property
 
-    let store: StoreOf<SettingFeature>
+
 
     // MARK: - Body
 
     var body: some View {
         List {
             Button(action: {
-                store.send(.notificationSettingButtonTapped)
             }) {
                 HStack {
                     Text("알림 관리하기")
@@ -151,7 +146,6 @@ fileprivate struct SettingListView: View {
                 }
             }
             Button(action: {
-                store.send(.reviewButtonTapped)
             }) {
                 HStack {
                     Text("리뷰 하러가기")
@@ -162,7 +156,6 @@ fileprivate struct SettingListView: View {
                 }
             }
             Button(action: {
-                store.send(.showGitHubButtonTapped)
             }) {
                 HStack {
                     Text("GitHub 보러가기")
@@ -173,7 +166,6 @@ fileprivate struct SettingListView: View {
                 }
             }
             Button(action: {
-                store.send(.feedbackButtonTapped)
             }) {
                 HStack {
                     Text("피드백 주기")
@@ -191,24 +183,19 @@ fileprivate struct SettingListView: View {
 fileprivate struct FooterView: View {
 
     // MARK: - Property
-
-    var store: StoreOf<SettingFeature>
+    @State var currentVersion: String = "1.0"
 
     // MARK: - Body
 
     var body: some View {
         VStack(spacing: 4) {
             Text("© 2024 SaveUs Team. All rights reserved.")
-            Text("현재 버전: \(store.currentVersion)")
+            Text("현재 버전: \(currentVersion)")
         }
         .font(.system(size: 12, weight: .regular))
     }
 }
 
 #Preview {
-    SettingView(
-        store: Store(initialState: SettingFeature.State()) {
-            SettingFeature()
-        }
-    )
+    SettingView()
 }

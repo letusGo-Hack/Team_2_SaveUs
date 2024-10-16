@@ -5,15 +5,12 @@
 //  Created by 이재훈 on 8/14/24.
 //
 
-import ComposableArchitecture
 import SwiftUI
 
 struct NotificationSettingView: View {
 
     // MARK: - Property
-
-    @Bindable var store: StoreOf<NotificationSettingFeature>
-
+    @State private var isActiveNotification: Bool = false
     // MARK: - Body
 
     var body: some View {
@@ -21,16 +18,16 @@ struct NotificationSettingView: View {
             NavigationBarView(title: "알림 관리하기")
             VStack(spacing: 16) {
                 Toggle(
-                    isOn: $store.isActiveNotification.sending(\.toggleNotification)
+                    isOn: $isActiveNotification
                 ) {
                     Text("알림 활성화")
                 }
                 .frame(height: 50)
-                if store.isActiveNotification {
+                if isActiveNotification {
                     HStack {
                         Text("알림 시간 설정")
                         Spacer()
-                        NotificationTimeView(store: store)
+                        NotificationTimeView()
                     }
                     .frame(height: 50)
                 }
@@ -44,16 +41,16 @@ struct NotificationSettingView: View {
 fileprivate struct NotificationTimeView: View {
 
     // MARK: - Property
-
-    @Bindable var store: StoreOf<NotificationSettingFeature>
+    @State private var isTimePickerPresented: Bool = false
+    @State private var notificationTime: Date = Date()
 
     // MARK: - Body
 
     var body: some View {
         Button {
-            store.send(.timeViewTapped)
+            isTimePickerPresented = true
         } label: {
-            Text(store.notificationTime.toString(format: "HH:mm"))
+            Text(notificationTime.toString(format: "HH:mm"))
                 .frame(width: 90, height: 40)
                 .foregroundStyle(.black)
         }
@@ -62,8 +59,8 @@ fileprivate struct NotificationTimeView: View {
             RoundedRectangle(cornerRadius: 4)
                 .stroke(.black, lineWidth: 1) // FIXME: 색상 변경
         }
-        .sheet(isPresented: $store.isTimePickerPresented.sending(\.timePickerViewPresented)) {
-            TimePickerView(store: store)
+        .sheet(isPresented: $isTimePickerPresented) {
+            TimePickerView(isTimePickerPresented: $isTimePickerPresented, notificationTime: $notificationTime)
         }
     }
 }
@@ -71,8 +68,8 @@ fileprivate struct NotificationTimeView: View {
 fileprivate struct TimePickerView: View {
 
     // MARK: - Property
-
-    @Bindable var store: StoreOf<NotificationSettingFeature>
+    @Binding var isTimePickerPresented: Bool
+    @Binding var notificationTime: Date
 
     // MARK: - Body
 
@@ -80,7 +77,7 @@ fileprivate struct TimePickerView: View {
         NavigationView {
             DatePicker(
                 "",
-                selection: $store.notificationTime.sending(\.setNotificationTime),
+                selection: $notificationTime,
                 displayedComponents: .hourAndMinute
             )
             .environment(\.locale, Locale(identifier: "ko_KR"))
@@ -88,7 +85,7 @@ fileprivate struct TimePickerView: View {
             .labelsHidden()
             .navigationBarItems(
                 trailing: Button("완료") {
-                    store.send(.timeConfirmButtonTapped)
+                    isTimePickerPresented = false
                 }
             )
         }
@@ -96,9 +93,5 @@ fileprivate struct TimePickerView: View {
 }
 
 #Preview {
-    NotificationSettingView(
-        store: Store(initialState: NotificationSettingFeature.State()) {
-            NotificationSettingFeature()
-        }
-    )
+    NotificationSettingView()
 }

@@ -14,13 +14,11 @@ import ComposableArchitecture
 struct SaveEarthApp: App {
 
   @AppStorage(AppStorageKeys.onboarding) var isOnboarding: Bool = false
-  let weatherManager: WeatherManager = .init()
 
   var body: some Scene {
     WindowGroup {
       if isOnboarding {
-        ContentView()
-          .environmentObject(weatherManager)
+        RootView()
           .modelContainer(for: DayInfo.self)
       } else {
         // 온보딩 화면을 보지 않은 경우 분기 처리

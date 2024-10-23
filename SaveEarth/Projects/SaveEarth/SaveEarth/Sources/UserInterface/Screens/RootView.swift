@@ -12,33 +12,25 @@ struct RootView: View {
 
   // MARK: - Property
 
-  @Bindable var store: StoreOf<RootFeature>
+  @State var navigator: Navigator = .init()
+  @State var weatherManager: WeatherManager = .init()
   @Environment(\.modelContext) private var context
 
   // MARK: - Body
 
   var body: some View {
-    NavigationStack(
-      path: $store.scope(state: \.path, action: \.path)
-    ) {
-      MainView(
-        store: withDependencies {
-          $0.weatherManager = .liveValue
-          $0.dayInfoModel = .liveValue
-          $0.dayInfoModel.updateContext(to: context)
-        } operation: {
-          .init(
-            initialState: MainFeature.State()
-          ) {
-            MainFeature()._printChanges()
+    NavigationStack(path: $navigator.path) {
+      MainView()
+        .navigationDestination(for: Screen.self) { screen in
+          switch screen {
+            case .setting:
+              SettingView(
+                store: .init(initialState: SettingFeature.State()) {
+                  SettingFeature()
+                }
+              )
           }
         }
-      )
-    } destination: { store in
-      switch store.case {
-        case .setting(let store):
-          SettingView(store: store)
-      }
     }
     .onOpenURL { deeplink in
       print(deeplink) // FIXME: 확인 LOG
@@ -47,14 +39,14 @@ struct RootView: View {
       }
 
       if let viewStackControl = ViewStackControl(of: urlComponents) { // ViewStackControl
-        store.send(.controlViewStack(viewStackControl))
+        navigator.control(by: viewStackControl)
       }
     }
+    .environment(weatherManager)
   }
 }
 
-// MARK: - View Dependency
-
+// TODO: 삭제 예정
 extension WeatherManager: DependencyKey {
   static var liveValue: WeatherManager { .init() }
 }
